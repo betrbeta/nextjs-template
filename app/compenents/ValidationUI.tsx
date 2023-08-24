@@ -39,9 +39,10 @@ const ValidationUI: React.FC<ValidationUIProps> = ({selectedString, existingStri
           isStringsMatch ? 'border-red-500' : 'border-gray-300'
         }`}
         required
+        autoComplete="off"
       />
       {isStringsMatch && (
-        <span className="text-red-500 mt-1 ml-3">
+        <span className="text-red-500 mt-1 block">
           It looks like you meant to enter this: {selectedString}
         </span>
       )}
