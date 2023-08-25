@@ -1,4 +1,4 @@
 
-const existingStrings = ['SINGAPOR', 'SOUTH KORIA', 'CHINA'];
+export const existingStrings = ['SINGAPOR', 'SOUTH KORIA', 'CHINA'];
 
-export default existingStrings
+export const sports = ['FOOTBALL', 'JUDO', 'KARATY', 'BASKETBALL']
