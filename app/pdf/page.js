@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
+
 import { PDFDocument } from "pdf-lib";
+import { useEffect, useState } from "react";
 
-export default function Pdf() {
+export default function Home() {
   const [pdfFileData, setPdfFileData] = useState();
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
-
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
+  const [files, setFiles] = useState(null);
   function readFileAsync(file) {
     return new Promise((resolve, reject) => {
       let reader = new FileReader();
@@ -26,19 +27,14 @@ export default function Pdf() {
     setPdfFileData(docUrl);
   }
 
-  const onSplit = (e) => {
-    setStart(e.target.value);
-    setEnd(e.target.value);
-  };
-
   function range(start, end) {
     let length = end - start + 1;
     return Array.from({ length }, (_, i) => start + i - 1);
   }
-
   async function extractPdfPage(arrayBuff) {
     const pdfSrcDoc = await PDFDocument.load(arrayBuff);
     const pdfNewDoc = await PDFDocument.create();
+
     const pages = await pdfNewDoc.copyPages(pdfSrcDoc, range(+start, +end));
     pages.forEach((page) => pdfNewDoc.addPage(page));
     const newpdf = await pdfNewDoc.save();
@@ -48,45 +44,60 @@ export default function Pdf() {
   // Execute when user select a file
   const onFileSelected = async (e) => {
     const fileList = e.target.files;
+    setFiles(fileList);
     if (fileList?.length > 0) {
       const pdfArrayBuffer = await readFileAsync(fileList[0]);
-      const newPdfDoc = await extractPdfPage(pdfArrayBuffer);
-      renderPdf(newPdfDoc);
+      // if (start > 1 && end > 1) {
+      //   const newPdfDoc = await extractPdfPage(pdfArrayBuffer);
+      //   return renderPdf(newPdfDoc);
+      // }
+
+      renderPdf(pdfArrayBuffer);
     }
   };
-
+  useEffect(() => {
+    if (start && end) {
+      const onEffect = async () => {
+        const pdfArrayBuffer = await readFileAsync(files[0]);
+        const newPdfDoc = await extractPdfPage(pdfArrayBuffer);
+        renderPdf(newPdfDoc);
+      };
+      onEffect();
+    }
+  }, [start, end]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 gap-2">
+    <div className=" flex flex-col items-center justify-center min-h-screen py-2">
       <input
         type="file"
         id="file-selector"
         accept=".pdf"
         onChange={onFileSelected}
+        className="mb-4"
       />
-      <div className="flex-row">
-        <input
-          type="number"
-          name="start"
-          placeholder="start page"
-          id=""
-          onChange={(e) => setStart(e.target.value)}
-          className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-        />
-        <input
-          type="number"
-          name="end"
-          placeholder="end page"
-          id=""
-          onChange={(e) => setEnd(e.target.value)}
-          className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-        />
-      </div>
-
+      {pdfFileData && (
+        <div>
+          <input
+            type="number"
+            name="start"
+            placeholder="start"
+            id=""
+            onChange={(e) => setStart(e.target.value)}
+            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+          />
+          <input
+            type="number"
+            name="end"
+            placeholder="end"
+            id=""
+            onChange={(e) => setEnd(e.target.value)}
+            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+          />
+        </div>
+      )}
       <iframe
         style={{ display: "block", width: "100vw", height: "90vh" }}
         title="PdfFrame"
         src={pdfFileData}
-        frameborder="0"
         type="application/pdf"
       ></iframe>
     </div>
