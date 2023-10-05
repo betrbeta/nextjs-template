@@ -84,7 +84,7 @@ const SubscriptionsTable: FC<Props> = (props) => {
                   </div>
                 </div>
               </td>
-              <td>{subscription.emailAddress}</td>
+              <td className="customer-email"customer-email>{subscription.emailAddress}</td>
             </tr>
           ))}
         </tbody>
