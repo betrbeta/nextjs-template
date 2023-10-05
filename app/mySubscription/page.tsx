@@ -3,6 +3,8 @@ import React from "react";
 import SubscriptionsTable from "../components/SubscriptionTable";
 import Subscription from "../interfaces/Subscription";
 
+
+
 const MySubscription = () => {
   const subscriptions: Subscription[] = [
     {
@@ -17,12 +19,28 @@ const MySubscription = () => {
       nextPaymentAmount: "$19.99",
       emailAddress: "jkpordje@gmail.com",
     },
+
+    {
+      orderId: 2,
+      subscriptionName: "Example Subscription 2",
+      paymentCycle: "Annually",
+      status: "Pending",
+      subscriptionStartDate: "2022-09-01",
+      subscriptionEndDate: "2023-10-01",
+      trialSubscriptionEndDate: "2023-09-15",
+      nextPaymentDueDate: "2023-10-01",
+      nextPaymentAmount: "$190.00",
+      emailAddress: "pordje@gmail.com",
+    },
   ];
 
+
+ 
   return (
     <div className="subscription-page">
       <h1>My Subscriptions</h1>
       <SubscriptionsTable subscriptions={subscriptions} />
+      
     </div>
   );
 };

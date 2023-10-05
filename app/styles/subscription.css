@@ -26,35 +26,49 @@
 }
 
 table {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  /* Remove display:flex and flex-direction: column */
+  border-collapse: collapse;
+  width: 100%;
 }
 
 thead {
   border-bottom: 2px solid #000;
-  padding-bottom: 20px;
+  background-color: #f2f2f2;
 }
 
 thead th {
-  vertical-align: bottom;
+  /* Adjust these styles for better alignment */
   min-width: 100px;
-  width: 10%;
-  text-align: left;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px;
+  border: 1px solid #000;
+  text-wrap: nowrap;
 }
 
 tbody td {
-  vertical-align: top;
+  /* Adjust these styles for better alignment */
   min-width: 100px;
-  width: 10%;
+  text-align: center;
+  font-size: 12px;
+  padding: 8px;
+  border: 1px solid #000;
+  text-wrap: nowrap;
 }
 
 .active {
   background-color: rgb(176, 255, 97);
-  border: green solid 1px;
+  border: 1px solid green;
   color: green;
-  padding: 2px;
-  border-radius: 1px;
+  padding: 4px;
+  border-radius: 2px;
+}
+.pending {
+  background-color: rgb(248, 129, 10);
+  border: 1px solid orange;
+  color: white;
+  padding: 4px;
+  border-radius: 2px;
 }
 
 .dropdown-content {
@@ -70,3 +84,4 @@ tbody td {
   text-decoration: underline;
   cursor: pointer;
 }
+

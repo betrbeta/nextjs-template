@@ -34,19 +34,19 @@ const SubscriptionsTable: FC<Props> = (props) => {
     <div className="subscription-table">
       <table>
         <thead>
-          <tr>
-            <th>OrderId</th>
-            <th>Subscription Name</th>
-            <th>Payment Cycle</th>
-            <th>Status</th>
-            <th>Subscription Start Date</th>
-            <th>Subscription End Date</th>
-            <th>Trial Subscription End Date</th>
-            <th>Next Payment Due Date</th>
-            <th>Next Payment Amount</th>
-            <th>Action</th>
-            <th>Email Address</th>
-          </tr>
+          <tr >
+          <th style={{ background: "black", color: "white" }}>OrderId</th>
+          <th style={{ background: "black", color: "white" }}>Subscription Name</th>
+          <th style={{ background: "black", color: "white" }}>Payment Cycle</th>
+          <th style={{ background: "black", color: "white" }}>Status</th>
+          <th style={{ background: "black", color: "white" }}>Subscription Start Date</th>
+          <th style={{ background: "black", color: "white" }}>Subscription End Date</th>
+          <th style={{ background: "black", color: "white" }}>Next Payment Due Date</th>
+          <th style={{ background: "black", color: "white" }}>Trial Subscription End Date</th>
+          <th style={{ background: "black", color: "white" }}>Next Payment Amount</th>
+          <th style={{ background: "black", color: "white" }}>Action</th>
+          <th style={{ background: "black", color: "white" }}>Email Address</th>
+        </tr>
         </thead>
         <tbody>
           {subscriptions.map((subscription) => (
@@ -62,12 +62,12 @@ const SubscriptionsTable: FC<Props> = (props) => {
 
               <td>{subscription.subscriptionStartDate}</td>
               <td>{subscription.subscriptionEndDate}</td>
-              <td>{subscription.trialSubscriptionEndDate}</td>
               <td>{subscription.nextPaymentDueDate}</td>
+              <td>{subscription.trialSubscriptionEndDate}</td>
               <td>{subscription.nextPaymentAmount}</td>
               <td>
                 <a className="renew-button actions">Renew</a> |{" "}
-                <a className="auto-renew-button actions">Enable Auto Renew</a> |{" "}
+                <a className="auto-renew-button actions">Auto Renew</a> |{" "}
                 <a className="upgrade-button actions">Upgrade</a> |{" "}
                 <div className="more-button-container actions">
                   <button className="more-button" onClick={toggleDropdown}>
