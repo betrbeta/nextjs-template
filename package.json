@@ -12,17 +12,21 @@
     "@types/node": "20.5.3",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "docxtemplater": "^3.40.0",
+    "file-saver": "^2.0.5",
     "firebase": "^10.4.0",
     "js-cookie": "^3.0.5",
     "mixpanel-browser": "^2.47.0",
     "next": "^13.4.19",
     "next-pwa": "^5.6.0",
-    "react": "18.2.0",
+    "pizzip": "^3.1.4",
+    "react": "^18.2.0",
     "react-cookie-consent": "^8.0.1",
     "react-dom": "18.2.0",
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/js-cookie": "^3.0.4",
     "@types/mixpanel-browser": "^2.47.2"
   }
