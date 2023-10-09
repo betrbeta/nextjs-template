@@ -3,6 +3,14 @@ import React, { FC } from "react";
 import Props from "../interfaces/Props";
 import "../styles/subscription.css";
 
+/**
+ * @class SubscriptionsTable Component
+ * @var {object} subscriptions The subscriptions object
+ * @function toggleDropdown The function to toggle the dropdown
+ * @function getStatusStyle The function to get the status style
+ * @description This component is used to display a table of subscriptions
+ * @returns Subscriptions Table
+ */
 const SubscriptionsTable: FC<Props> = (props) => {
   const { subscriptions } = props;
 

@@ -5,6 +5,13 @@ import { getFirestore, collection, query, getDocs } from "firebase/firestore";
 import app from "@/lib/filebase/firebaseConfig";
 import Subscription from "../interfaces/Subscription";
 
+/**
+ * @topic My Subscriptions Page
+ * @class MySubscription Page
+ * @var {object} subscriptions The subscriptions object
+ * @description This component is used to display the subscriptions page
+ * @returns My Subscriptions Page
+ */
 const MySubscription = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 

@@ -1,14 +1,26 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import "./styles/style.css";
-
 import mixpanel from "../config/mixpanel";
-
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
+import Subscription from "./interfaces/Subscription";
+import Props from "./interfaces/Props";
+import SubscriptionsTable from "./components/SubscriptionTable";
+import MySubscription from "./mySubscription/page";
 
+/**
+ * @topic Home Page
+ * @class Home Page
+ * @var {object} url The url object
+ * @function trackWebsiteFetch The function to track website fetch event
+ * @function getSiteAvailability The function to get the site availability
+ * @function FetchWebsite The function to fetch the website
+ * @function Home The function to display the home page
+ * @description This component is used to display the home page
+ * @returns Home Page
+ */
 const FetchWebsite = ({ url }: { url: string }) => {
   const [hasError, setHasError] = useState(false);
 
