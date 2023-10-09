@@ -8,7 +8,7 @@ import mixpanel from "../config/mixpanel";
 
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
-import generateDocument from "@/utils/generateDocument";
+import createZip from "@/utils/generateDocument";
 
 const FetchWebsite = ({ url }: { url: string }) => {
   const [hasError, setHasError] = useState(false);
@@ -64,6 +64,10 @@ const FetchWebsite = ({ url }: { url: string }) => {
 const Home = () => {
   const [url, setUrl] = useState("");
 
+  const handleDownloadClick = () => {
+    createZip(); // Call the createZip function to generate and download the zip file
+  };
+
   return (
     <>
       <div>
@@ -81,7 +85,7 @@ const Home = () => {
       <CookieBanner />
       <Link href="/mySubscription">Go to subscription page</Link>
       <br />
-      <button onClick={generateDocument}>Generate doc</button>
+      <button onClick={handleDownloadClick}>Generate doc</button>
     </>
   );
 };
