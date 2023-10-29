@@ -6,6 +6,7 @@ import mixpanel from "../config/mixpanel";
 
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
+var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
 const FetchWebsite = ({url}: {url: string}) => {
   const [hasError, setHasError] = useState(false);
@@ -168,6 +169,8 @@ const Home = () => {
       <button type="button" onClick={handleSendEmail}>
         Send email
       </button>
+      <feedback-component></feedback-component>
+
     </>
   );
 };
