@@ -6,6 +6,8 @@ import mixpanel from "../config/mixpanel";
 
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
+import {FeedbackFish} from "@feedback-fish/react";
+
 
 const FetchWebsite = ({url}: {url: string}) => {
   const [hasError, setHasError] = useState(false);
@@ -168,6 +170,9 @@ const Home = () => {
       <button type="button" onClick={handleSendEmail}>
         Send email
       </button>
+      <FeedbackFish projectId="..." userId="">
+        <button>Send feedback</button>
+      </FeedbackFish>
     </>
   );
 };
