@@ -6,6 +6,8 @@ import mixpanel from "../config/mixpanel";
 
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
+import LikeIconSvg from "./components/LikeIconSvg";
+import DislikeIconSvg from "./components/DislikeIconSvg";
 var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
 const FetchWebsite = ({url}: {url: string}) => {
@@ -155,22 +157,46 @@ const Home = () => {
     createTemplate();
   };
 
+  const[changeColor, setChangeColor] = useState(false)
+
+  const handleFeedback = () =>{
+    setChangeColor(!changeColor)
+  }
+
   return (
     <>
-      <div>
-        <h1 className="title">Webpage Viewer</h1>
+      <div className="min-h-[100vh] flex flex-col justify-between">
         <div>
-          <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Enter URL" />
+          <div>
+            <h1 className="title">Webpage Viewer</h1>
+            <div>
+              <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Enter URL" />
+            </div>
+            <div>{url && <FetchWebsite url={url} />}</div>
+          </div>
+          <CookieBanner />
+          <Link href="/mySubscription">Go to subscription page</Link>
+          <button type="button" onClick={handleSendEmail}>
+            Send email
+          </button>
         </div>
-        <div>{url && <FetchWebsite url={url} />}</div>
+          <div className={`w-[16%] h-[5%] rounded-md p-[5px] m-1 justify-end ml-[80%] ${(changeColor === true)? 'bg-[#e8fcd7]':'bg-[#e6fafb]'}`}>
+          <feedback-component onClick={handleFeedback}>
+            <span slot="cta" className="text-[#003558] m-[3px]">
+              Was this page helpful?
+            </span>
+            <span slot="confirmation" className="text-[#4e7a3e]" >
+              Thank you for your feedback!
+            </span>
+              <span slot="option-icon:0">
+                <LikeIconSvg/>
+              </span>
+              <span slot="option-icon:1">
+                <DislikeIconSvg/>
+              </span>
+          </feedback-component>
+          </div>
       </div>
-      <CookieBanner />
-      <Link href="/mySubscription">Go to subscription page</Link>
-      <button type="button" onClick={handleSendEmail}>
-        Send email
-      </button>
-      <feedback-component></feedback-component>
-
     </>
   );
 };
