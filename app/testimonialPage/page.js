@@ -1,45 +1,93 @@
 "use client";
-import '../globals.css';
+import React from 'react';
 
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export default function TestimonialPage() {
-  const [sliderRef] = useKeenSlider({
-    loop: true,
-    slidesPerView: 3,
-    mode: "free-snap",
-  });
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+
+import slide_image_1 from "./../assets/images/img_1.jpg";
+import slide_image_2 from "./../assets/images/img_2.jpg";
+import slide_image_3 from "./../assets/images/img_3.jpg";
+import slide_image_4 from "./../assets/images/img_4.jpg";
+import slide_image_5 from "./../assets/images/img_5.jpg";
+import slide_image_6 from "./../assets/images/img_6.jpg";
+import slide_image_7 from "./../assets/images/img_7.jpg";
+
+
+function TestimonialPage() {
   return (
-    <>
-    <div ref={sliderRef} className="keen-slider">
-      <div className="keen-slider__slide">
-        <div className="card bg-white shadow-md rounded p-4">
-          <img src="https://source.unsplash.com/random/100x100" alt="User 1" className="rounded-full" />
-          <h2 className="text-xl font-bold mt-2">User 1</h2>
-          <p className="text-gray-500">Software Engineer</p>
-          <p className="mt-2">"This is first testimonial."</p>
+    <div className="container max-w-full min-h-full">
+      <h1 className='text-center '>Testimonial Page</h1>
+      <Swiper
+      effect={'coverflow'}
+      grabCursor={true}
+      centeredSlides={true}
+      loop={true}
+      slidesPerView={'auto'}
+      coverflowEffect={{
+        rotate: 0,
+        strectch: 0,
+        depth: 100,
+        modifier: 2.5,
+        }
+      }
+      pagination={ {el:'.swiper-pagination', clickable:true}}
+      navigation={ {
+        nextEl:'.swiper-button-next',
+        prevEl:'.swiper-button-prev',
+        clickable: true,
+      }}
+      modules={[EffectCoverflow, Pagination, Navigation]}
+      className='swiper_container'
+      >
+        <SwiperSlide>
+          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
+          <h1>Name</h1>
+          <p>JOB</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
+          <h1>Name</h1>
+          <p>JOB</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
+          <h1>Name</h1>
+          <p>JOB</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
+          <h1>Name</h1>
+          <p>JOB</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
+          <h1>Name</h1>
+          <p>JOB</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </SwiperSlide>
+
+        <div className='slider-controller'>
+          <div className='swiper-button-prev slider-arrow'>
+            {/* add icon here */}
+          </div>
+          <div className='swiper-button-next slider-arrow'>
+            {/* add icon here */}
+          </div>
+          <div className="swiper-pagination"></div>
         </div>
-      </div>
-      <div className="keen-slider__slide">
-        <div className="card bg-white shadow-md rounded p-4">
-          <img src="https://source.unsplash.com/random/101x101" alt="User 2" className="rounded-full" />
-          <h2 className="text-xl font-bold mt-2">User 2</h2>
-          <p className="text-gray-500">Product Manager</p>
-          <p className="mt-2">"This is second testimonial."</p>
-        </div>
-      </div>
-      <div className="keen-slider__slide">
-        <div className="card bg-white shadow-md rounded p-4">
-          <img src="https://source.unsplash.com/random/102x102" alt="User 3" className="rounded-full" />
-          <h2 className="text-xl font-bold mt-2">User 3</h2>
-          <p className="text-gray-500">Data Scientist</p>
-          <p className="mt-2">"This is third testimonial."</p>
-        </div>
-      </div>
-      
+      </Swiper>
     </div>
-    </>
   );
 }
+
+export default TestimonialPage;
