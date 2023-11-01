@@ -1,19 +1,11 @@
 "use client";
+
 import React, {useEffect, useState} from "react";
 import "./styles/style.css";
 import mixpanel from "../config/mixpanel";
 
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
-import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 
 var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
@@ -140,7 +132,7 @@ const Home = () => {
       .catch((err) => console.error(err));
   }
 
-  async function sendEmail(id:string) {
+  async function sendEmail(id) {
     const options = {
       method: "POST",
       headers: {
@@ -256,6 +248,7 @@ const Home = () => {
         </div>
       </Swiper>
     </div>
+
     </>
   );
 };

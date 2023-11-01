@@ -10,15 +10,6 @@ import 'swiper/css/navigation';
 
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 
-import slide_image_1 from "./../assets/images/img_1.jpg";
-import slide_image_2 from "./../assets/images/img_2.jpg";
-import slide_image_3 from "./../assets/images/img_3.jpg";
-import slide_image_4 from "./../assets/images/img_4.jpg";
-import slide_image_5 from "./../assets/images/img_5.jpg";
-import slide_image_6 from "./../assets/images/img_6.jpg";
-import slide_image_7 from "./../assets/images/img_7.jpg";
-
-
 function TestimonialPage() {
   return (
     <div className="container max-w-full min-h-full">
@@ -32,7 +23,7 @@ function TestimonialPage() {
       coverflowEffect={{
         rotate: 0,
         strectch: 0,
-        depth: 100,
+        depth: 200,
         modifier: 2.5,
         }
       }
@@ -46,34 +37,44 @@ function TestimonialPage() {
       className='swiper_container'
       >
         <SwiperSlide>
+        <div className="bg-green-400 max-w-[20%] mx-auto">
           <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
           <h1>Name</h1>
           <p>JOB</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </div>
         </SwiperSlide>
         <SwiperSlide>
+        <div className="bg-green-400 max-w-[20%] mx-auto">
           <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
           <h1>Name</h1>
           <p>JOB</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </div>
         </SwiperSlide>
         <SwiperSlide>
+        <div className="bg-green-400 max-w-[20%] mx-auto">
           <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
           <h1>Name</h1>
           <p>JOB</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </div>
         </SwiperSlide>
         <SwiperSlide>
+        <div className="bg-green-400 max-w-[20%] mx-auto">
           <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
           <h1>Name</h1>
           <p>JOB</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </div>
         </SwiperSlide>
         <SwiperSlide>
+        <div className="bg-green-400 max-w-[20%] mx-auto">
           <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full'/>
           <h1>Name</h1>
           <p>JOB</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+        </div>
         </SwiperSlide>
 
         <div className='slider-controller'>
