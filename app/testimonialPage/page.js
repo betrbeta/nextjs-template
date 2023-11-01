@@ -23,19 +23,28 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 
 function TestimonialPage() {
   return (
-    <div className="container max-w-full min-h-full">
+    <div className="container max-w-full min-h-full p-5">
       <h1 className='text-center my-3 font-weight-bold'>Testimonial Page</h1>
       <Swiper
       effect={'coverflow'}
       grabCursor={true}
       centeredSlides={true}
       loop={true}
-      slidesPerView={3}
+      breakpoints={{
+        // when window width is >= 640px
+        640: {
+          slidesPerView: 1,
+        },
+        // when window width is >= 768px
+        768: {
+          slidesPerView: 3,
+        },
+      }}
       coverflowEffect={{
         rotate: 0,
         strectch: 0,
         depth: 100,
-        modifier: 2.5,
+        modifier: 3.5,
         }
       }
       pagination={ {el:'.swiper-pagination', clickable:true}}
@@ -45,63 +54,61 @@ function TestimonialPage() {
         clickable: true,
       }}
       modules={[EffectCoverflow, Pagination, Navigation]}
-      className='swiper_container text-slate-950 my-3'
+      className='swiper_container text-slate-950 my-5 py-20 z-4'
       >
-        <SwiperSlide className="bg-white p-5">
-          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full my-3'/>
-          <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-          <p className="font-medium my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
-          <div className="text-sm">
-            <h1 className="font-normal">John Doe</h1>
-            <p className="font-light">Software Engineer</p>
+        <div className='container mt-12'>
+        <SwiperSlide className="relative bg-white p-8">
+          <div className="relative">
+            <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
+            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white shadow-lg
+            '/>
+          </div>
+          <div className="relative mt-16">
+            <div className="text-sm text-center mt-5">
+                <h1 className="font-medium">John Doe</h1>
+                <p className="font-light">Software Engineer</p>
+            </div>
+            <div className="mt-5 container">
+              <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
+              <p className="font-normal my-3 text-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+            </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide className="bg-white p-5">
-          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full my-3'/>
-          <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-          <p className="font-medium my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
-          <div className="text-sm">
-            <h1 className="font-normal">John Doe</h1>
-            <p className="font-light">Software Engineer</p>
+        <SwiperSlide className="bg-white p-8">
+          <div className="relative">
+            <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
+            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white shadow-lg
+            '/>
+          </div>
+          <div className="relative mt-16">
+            <div className="text-sm text-center mt-5">
+                <h1 className="font-medium">John Doe</h1>
+                <p className="font-light">Software Engineer</p>
+            </div>
+            <div className="mt-5">
+              <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
+              <p className="font-normal my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+            </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide className="bg-white p-5">
-          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full my-3'/>
-          <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-          <p className="font-medium my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
-          <div className="text-sm">
-            <h1 className="font-normal">John Doe</h1>
-            <p className="font-light">Software Engineer</p>
+        <SwiperSlide className="bg-white p-8">
+          <div className="relative">
+            <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
+            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white shadow-lg
+            '/>
+          </div>
+          <div className="relative mt-16">
+            <div className="text-sm text-center mt-5">
+                <h1 className="font-medium">John Doe</h1>
+                <p className="font-light">Software Engineer</p>
+            </div>
+            <div className="mt-5">
+              <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
+              <p className="font-normal my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+            </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide className="bg-white p-5">
-          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full my-3'/>
-          <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-          <p className="font-medium my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
-          <div className="text-sm">
-            <h1 className="font-normal">John Doe</h1>
-            <p className="font-light">Software Engineer</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="bg-white p-5">
-          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full my-3'/>
-          <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-          <p className="font-medium my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
-          <div className="text-sm">
-            <h1 className="font-normal">John Doe</h1>
-            <p className="font-light">Software Engineer</p>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="bg-white p-5">
-          <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full my-3'/>
-          <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-          <p className="font-medium my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
-          <div className="text-sm">
-            <h1 className="font-normal">John Doe</h1>
-            <p className="font-light">Software Engineer</p>
-          </div>
-        </SwiperSlide>
-
+        </div>
         <div className='slider-controller'>
           <div className='swiper-button-prev slider-arrow'>
             {/* add icon here */}
