@@ -12,6 +12,7 @@
 /.next/
 /out/
 public/workbox*
+public/sw.js.map
 
 # production
 /build
