@@ -57,16 +57,17 @@ function TestimonialPage() {
       className='swiper_container text-slate-950 my-5 py-20 z-4'
       >
         <div className='container mt-12'>
-        <SwiperSlide className="relative bg-white p-8">
+        <SwiperSlide className="relative bg-white p-8 rounded-lg">
           <div className="relative">
-            <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
-            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white shadow-lg
+            <img src="https://source.unsplash.com/random/120x120" className='mx-auto rounded-full absolute
+            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white drop-shadow-xl
             '/>
           </div>
           <div className="relative mt-16">
-            <div className="text-sm text-center mt-5">
-                <h1 className="font-medium">John Doe</h1>
-                <p className="font-light">Software Engineer</p>
+            <div className="text-center mt-5">
+                <p className="font-medium text-xs text-cyan-400">Berlin</p>
+                <h1 className="font-extrabold text-2xl my-0 p-0">John Doe</h1>
+                <p className="font-medium text-xs text-cyan-400">Software Engineer</p>
             </div>
             <div className="mt-5 container">
               <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
@@ -74,43 +75,45 @@ function TestimonialPage() {
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide className="bg-white p-8">
+        <SwiperSlide className="relative bg-white p-8 rounded-lg">
           <div className="relative">
             <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
-            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white shadow-lg
+            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white drop-shadow-xl
             '/>
           </div>
           <div className="relative mt-16">
-            <div className="text-sm text-center mt-5">
-                <h1 className="font-medium">John Doe</h1>
-                <p className="font-light">Software Engineer</p>
+            <div className="text-center mt-5">
+                <p className="font-medium text-xs text-cyan-400">Berlin</p>
+                <h1 className="font-extrabold text-2xl my-0 p-0">John Doe</h1>
+                <p className="font-medium text-xs text-cyan-400">Software Engineer</p>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 container">
               <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-              <p className="font-normal my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+              <p className="font-normal my-3 text-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
             </div>
           </div>
         </SwiperSlide>
-        <SwiperSlide className="bg-white p-8">
+        <SwiperSlide className="relative bg-white p-8 rounded-lg">
           <div className="relative">
             <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
-            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white shadow-lg
+            m-auto left-0 right-0 -translate-y-3/4 border-8 border-white drop-shadow-xl
             '/>
           </div>
           <div className="relative mt-16">
-            <div className="text-sm text-center mt-5">
-                <h1 className="font-medium">John Doe</h1>
-                <p className="font-light">Software Engineer</p>
+            <div className="text-center mt-5">
+                <p className="font-medium text-xs text-cyan-400">Berlin</p>
+                <h1 className="font-extrabold text-2xl my-0 p-0">John Doe</h1>
+                <p className="font-medium text-xs text-cyan-400">Software Engineer</p>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 container">
               <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
-              <p className="font-normal my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
+              <p className="font-normal my-3 text-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
             </div>
           </div>
         </SwiperSlide>
         </div>
         <div className='slider-controller'>
-          <div className='swiper-button-prev slider-arrow'>
+          <div className='swiper-button-prev slider-arrow rounded-full bg-white p-8'>
             {/* add icon here */}
           </div>
           <div className='swiper-button-next slider-arrow'>
