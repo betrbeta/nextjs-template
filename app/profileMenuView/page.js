@@ -24,15 +24,15 @@ export default function ProfileMenuView() {
           onClick={handleClickOpen}/>
      </div>
 
-     <div className={`${open ? "lg:left-[68%] max-sm:left-[0%] sm:left-[47%] xl:left-[79.5%] md:left-[61%]" : "left-[100%]"} duration-300 top-full h-[50%] bg-white relative w-[400px] rounded-md shadow-2xl`}>
-          <div className='flex'>
+     <div className={`${open ? "lg:left-[68%] max-sm:left-[0%] sm:left-[47%] xl:left-[79.5%] md:left-[61%]" : "left-[100%]"} duration-300 top-full h-[50%] bg-white relative w-[400px] rounded-md shadow-2xl drop-shadow-2xl`}>
+          <div className='flex pt-4'>
                <img src="https://picsum.photos/200/300" alt="profile_pic" className='object-cover h-32 p-2 m-2 ml-10 w-28 rounded-xl'/>
                <div className='block'>
                     <div className='mx-5 mt-5 text-lg font-bold'><p>Name</p></div>
                     <div className='mx-5 mt-5 text-sm font-medium'><p>example@email.com</p></div>
                     <div className='mx-5 mt-5 text-sm font-medium'><p>User ID: 0000000</p></div>
                </div>
-               <div className='ml-[7%] mr-2 pt-2 cursor-pointer w-8 h-8' onClick={handleClickOpen}>
+               <div className='ml-[7%] mr-3 pt-2 cursor-pointer w-8 h-8' onClick={handleClickOpen}>
                     <CloseSvg/>
                </div>
           </div>
