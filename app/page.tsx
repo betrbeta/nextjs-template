@@ -10,6 +10,14 @@ import LikeIconSvg from "./components/LikeIconSvg";
 import DislikeIconSvg from "./components/DislikeIconSvg";
 var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      ['feedback-component']: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+    }
+    }
+  }
+
 const FetchWebsite = ({url}: {url: string}) => {
   const [hasError, setHasError] = useState(false);
 
@@ -133,7 +141,7 @@ const Home = () => {
       .catch((err) => console.error(err));
   }
 
-  async function sendEmail(id) {
+  async function sendEmail(id: number) {
     const options = {
       method: "POST",
       headers: {
