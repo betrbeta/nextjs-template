@@ -4,10 +4,27 @@ import React, {useEffect, useState} from "react";
 import "./styles/style.css";
 import mixpanel from "../config/mixpanel";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
+import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 
 var feedbackComponent = require("@ramseyinhouse/feedback-component")
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      ['feedback-component']: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+    }
+    }
+  }
+
 
 const FetchWebsite = ({url}: {url: string}) => {
   const [hasError, setHasError] = useState(false);
@@ -132,7 +149,7 @@ const Home = () => {
       .catch((err) => console.error(err));
   }
 
-  async function sendEmail(id) {
+  async function sendEmail(id: number) {
     const options = {
       method: "POST",
       headers: {
@@ -182,7 +199,7 @@ const Home = () => {
       slidesPerView={'auto'}
       coverflowEffect={{
         rotate: 0,
-        strectch: 0,
+        stretch: 0,
         depth: 200,
         modifier: 2.5,
         }
@@ -191,7 +208,7 @@ const Home = () => {
       navigation={ {
         nextEl:'.swiper-button-next',
         prevEl:'.swiper-button-prev',
-        clickable: true,
+        
       }}
       modules={[EffectCoverflow, Pagination, Navigation]}
       className='swiper_container'
