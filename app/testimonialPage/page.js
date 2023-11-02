@@ -77,7 +77,7 @@ function TestimonialPage() {
         </SwiperSlide>
         <SwiperSlide className="relative bg-white p-8 rounded-lg">
           <div className="relative">
-            <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
+            <img src="https://source.unsplash.com/random/120x120" className='mx-auto rounded-full absolute
             m-auto left-0 right-0 -translate-y-3/4 border-8 border-white drop-shadow-xl
             '/>
           </div>
@@ -95,7 +95,7 @@ function TestimonialPage() {
         </SwiperSlide>
         <SwiperSlide className="relative bg-white p-8 rounded-lg">
           <div className="relative">
-            <img src="https://source.unsplash.com/random/100x100" className='mx-auto rounded-full absolute
+            <img src="https://source.unsplash.com/random/120x120" className='mx-auto rounded-full absolute
             m-auto left-0 right-0 -translate-y-3/4 border-8 border-white drop-shadow-xl
             '/>
           </div>
@@ -113,10 +113,18 @@ function TestimonialPage() {
         </SwiperSlide>
         </div>
         <div className='slider-controller'>
-          <div className='swiper-button-prev slider-arrow rounded-full bg-white p-8'>
+          <div style={{
+                "--swiper-navigation-color": "white",
+                "--swiper-navigation-size": "10px",
+              }}
+            className='font-extrabold swiper-button-prev slider-arrow rounded-full bg-cyan-400 p-4'>
             {/* add icon here */}
           </div>
-          <div className='swiper-button-next slider-arrow'>
+          <div style={{
+                "--swiper-navigation-color": "white",
+                "--swiper-navigation-size": "10px",
+              }} 
+            className='font-extrabold swiper-button-next slider-arrow rounded-full bg-cyan-400 p-4'>
             {/* add icon here */}
           </div>
           <div className="swiper-pagination"></div>
