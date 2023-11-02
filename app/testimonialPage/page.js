@@ -23,7 +23,7 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 
 function TestimonialPage() {
   return (
-    <div className="container max-w-full min-h-full p-5">
+    <div className="container max-w-full min-h-full p-5 -z-5">
       <h1 className='text-center my-3 font-weight-bold'>Testimonial Page</h1>
       <Swiper
       effect={'coverflow'}
@@ -54,7 +54,7 @@ function TestimonialPage() {
         clickable: true,
       }}
       modules={[EffectCoverflow, Pagination, Navigation]}
-      className='swiper_container text-slate-950 my-5 py-20 z-4'
+      className='swiper_container text-slate-950 my-5 py-20 z-10'
       >
         <div className='container mt-12'>
         <SwiperSlide className="relative bg-white p-8 rounded-lg">
@@ -70,7 +70,12 @@ function TestimonialPage() {
                 <p className="font-medium text-xs text-cyan-400">Software Engineer</p>
             </div>
             <div className="mt-5 container">
-              <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
+              <FontAwesomeIcon
+                style={{ "position":"absolute" }}
+                icon={faQuoteLeft} className="mr-3 -z-2 opacity-10 text-cyan-700"
+                size="4x"
+                />
+              <div className="p-2"></div>
               <p className="font-normal my-3 text-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
             </div>
           </div>
@@ -88,7 +93,12 @@ function TestimonialPage() {
                 <p className="font-medium text-xs text-cyan-400">Software Engineer</p>
             </div>
             <div className="mt-5 container">
-              <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
+              <FontAwesomeIcon
+                style={{ "position":"absolute" }}
+                icon={faQuoteLeft} className="mr-3 -z-2 opacity-10 text-cyan-700"
+                size="4x"
+                />
+              <div className="p-2"></div>
               <p className="font-normal my-3 text-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
             </div>
           </div>
@@ -106,7 +116,12 @@ function TestimonialPage() {
                 <p className="font-medium text-xs text-cyan-400">Software Engineer</p>
             </div>
             <div className="mt-5 container">
-              <FontAwesomeIcon icon={faQuoteLeft} className="mr-3" />
+              <FontAwesomeIcon
+                style={{ "position":"absolute" }}
+                icon={faQuoteLeft} className="mr-3 -z-2 opacity-10 text-cyan-700"
+                size="4x"
+                />
+              <div className="p-2"></div>
               <p className="font-normal my-3 text-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus alias labore officiis quae maxime inventore, eaque tempore repellendus? Error sint ex earum minus illo nihil ipsa mollitia nemo quod maxime!</p>
             </div>
           </div>
@@ -117,14 +132,14 @@ function TestimonialPage() {
                 "--swiper-navigation-color": "white",
                 "--swiper-navigation-size": "10px",
               }}
-            className='font-extrabold swiper-button-prev slider-arrow rounded-full bg-cyan-400 p-4'>
+            className='font-extrabold swiper-button-prev slider-arrow rounded-full bg-blue-700 p-4'>
             {/* add icon here */}
           </div>
           <div style={{
                 "--swiper-navigation-color": "white",
                 "--swiper-navigation-size": "10px",
               }} 
-            className='font-extrabold swiper-button-next slider-arrow rounded-full bg-cyan-400 p-4'>
+            className='font-extrabold swiper-button-next slider-arrow rounded-full bg-blue-700 p-4'>
             {/* add icon here */}
           </div>
           <div className="swiper-pagination"></div>
