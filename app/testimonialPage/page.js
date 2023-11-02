@@ -57,7 +57,8 @@ function TestimonialPage() {
       className='swiper_container text-slate-950 my-5'
       >
         <div className='container mt-12'>
-        <SwiperSlide className="bg-white p-8 rounded-lg">
+        <SwiperSlide
+        className="bg-white p-8 rounded-lg">
         <div className='flex items-center'>
           <div className='flex-1 w-1/4 mr-3 mt-1'>
             <img src="https://source.unsplash.com/random/120x120" 
