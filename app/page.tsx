@@ -69,6 +69,7 @@ const FetchWebsite = ({url}: {url: string}) => {
 
 const Home = () => {
   const [url, setUrl] = useState("");
+  const [feedback, setFeedback] = useState('');
 
   async function createTemplate() {
     const options = {
@@ -171,6 +172,38 @@ const Home = () => {
     setChangeColor(!changeColor)
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(feedback);
+  };
+
+  const handleBadFeedback = () =>{
+    return (
+        <div className="fixed right-4 bottom-4 bg-white border rounded shadow p-4 transform translate-x-0 -translate-y-4 transition-transform ease-in-out duration-300">
+          <div className="container mx-auto p-4">
+            <h1 className="text-2xl font-semibold mb-4">Unhappy Scenario Feedback</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="block font-semibold mb-2">Describe the issue:</label>
+                <textarea
+                    className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+                    value={feedback}
+                    onChange={(e) => setFeedback(e.target.value)}
+                    rows={5}
+                ></textarea>
+              </div>
+              <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+              >
+                Submit Feedback
+              </button>
+            </form>
+          </div>
+        </div>
+    );
+  }
+
   return (
     <>
       <div className="">
@@ -200,10 +233,10 @@ const Home = () => {
             <span slot="confirmation" className="text-[#4e7a3e]" >
               Thank you for your feedback!
             </span>
-              <span slot="option-icon:0">
+              <span slot="option-icon:0" >
                 <LikeIconSvg/>
               </span>
-              <span slot="option-icon:1">
+              <span slot="option-icon:1" onClick={handleBadFeedback}>
                 <DislikeIconSvg/>
               </span>
           </feedback-component>
