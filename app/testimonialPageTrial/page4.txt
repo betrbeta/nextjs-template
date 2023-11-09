@@ -21,7 +21,7 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 // import slide_image_7 from "./../assets/images/img_7.jpg";
 
 
-function TestimonialPage3() {
+function TestimonialPage() {
   return (
     <div className="container max-w-full min-h-full p-5 -z-5">
       <h1 className='text-center my-3 font-weight-bold'>Testimonial Page</h1>
@@ -33,11 +33,11 @@ function TestimonialPage3() {
       breakpoints={{
         // when window width is >= 640px
         640: {
-          slidesPerView: 2.5,
+          slidesPerView: 1,
         },
         // when window width is >= 768px
         768: {
-          slidesPerView: 2.2,
+          slidesPerView: 3,
         },
       }}
       coverflowEffect={{
@@ -161,4 +161,4 @@ function TestimonialPage3() {
   );
 }
 
-export default TestimonialPage3;
+export default TestimonialPage;
