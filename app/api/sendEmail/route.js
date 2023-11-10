@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import logger from "/logger";
+
+
 
 const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
@@ -25,14 +28,14 @@ export async function POST(request) {
       await sendTestTrackableEmail("", email);
       return Response.json({message: "Success!"});
     } catch (error) {
-      console.log("Error", error);
+      logger.error("Error", error);
       return Response.json({error: "Invalid log level"});
     }
   }
 }
 
 async function sendTestTrackableEmail(testText, email) {
-  console.log(email);
+  logger.info(email);
 
   await transporter.sendMail({
     from: process.env.MAILER_USER,
