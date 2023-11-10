@@ -9,6 +9,8 @@ import Link from "next/link";
 import LikeIconSvg from "./components/LikeIconSvg";
 import DislikeIconSvg from "./components/DislikeIconSvg";
 import Script from "next/script";
+import logger from "@/logger";
+
 var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
 declare global {
@@ -141,7 +143,7 @@ const Home = () => {
     fetch("https://api.brevo.com/v3/smtp/templates", options)
       .then((response) => response.json())
       .then(({id}) => sendEmail(id))
-      .catch((err) => console.error(err));
+      .catch((err) => logger.error(err));
   }
 
   async function sendEmail(id: number) {
@@ -160,8 +162,8 @@ const Home = () => {
 
     await fetch("https://api.brevo.com/v3/smtp/email", options)
       .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
+      .then((response) => logger.info(response))
+      .catch((err) => logger.error(err));
   }
 
   const handleSendEmail = () => {
