@@ -1,25 +1,16 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/style.css";
 import mixpanel from "../config/mixpanel";
-
+import NavBar from "./components/NavBar";
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
 import LikeIconSvg from "./components/LikeIconSvg";
 import DislikeIconSvg from "./components/DislikeIconSvg";
 import Script from "next/script";
-var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      ['feedback-component']: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-    }
-    }
-  }
-
-const FetchWebsite = ({url}: {url: string}) => {
+const FetchWebsite = ({ url }: { url: string }) => {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -30,12 +21,12 @@ const FetchWebsite = ({url}: {url: string}) => {
      * @param url - URL of the website
      */
     const trackWebsiteFetch = (url: string) => {
-      mixpanel.track("Website Fetched", {url});
+      mixpanel.track("Website Fetched", { url });
     };
 
     const getSiteAvailability = async () => {
       try {
-        await fetch(url, {mode: "no-cors", signal: abortController.signal});
+        await fetch(url, { mode: "no-cors", signal: abortController.signal });
         setHasError(false);
 
         // Track website fetch event
@@ -53,7 +44,9 @@ const FetchWebsite = ({url}: {url: string}) => {
   return (
     <div>
       {hasError ? (
-        <div className="error">An error occurred while loading the website.</div>
+        <div className="error">
+          An error occurred while loading the website.
+        </div>
       ) : (
         <iframe
           src={url}
@@ -72,17 +65,17 @@ const Home = () => {
   const [url, setUrl] = useState("");
   const [sadFeedback, setSadFeedback] = useState(false);
 
-
   async function createTemplate() {
     const options = {
       method: "POST",
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        "api-key": "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",
+        "api-key":
+          "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",
       },
       body: JSON.stringify({
-        sender: {email: "savytskyimark@gmail.com"},
+        sender: { email: "savytskyimark@gmail.com" },
         templateName: "emailConfirmation",
         htmlContent: `<div
       style="
@@ -140,7 +133,7 @@ const Home = () => {
 
     fetch("https://api.brevo.com/v3/smtp/templates", options)
       .then((response) => response.json())
-      .then(({id}) => sendEmail(id))
+      .then(({ id }) => sendEmail(id))
       .catch((err) => console.error(err));
   }
 
@@ -150,10 +143,11 @@ const Home = () => {
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        "api-key": "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",
+        "api-key":
+          "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",
       },
       body: JSON.stringify({
-        to: [{email: "dorozhe.zolota777@gmail.com"}],
+        to: [{ email: "dorozhe.zolota777@gmail.com" }],
         templateId: id,
       }),
     };
@@ -168,24 +162,32 @@ const Home = () => {
     createTemplate();
   };
 
-  const[changeColor, setChangeColor] = useState(false)
+  const [changeColor, setChangeColor] = useState(false);
 
-  const handleFeedback = () =>{
-    setChangeColor(!changeColor)
-  }
+  const handleFeedback = () => {
+    setChangeColor(!changeColor);
+  };
 
-  const handleBadFeedback = () =>{
+  const handleBadFeedback = () => {
     setSadFeedback(true);
-  }
+  };
 
   return (
     <>
-      <div className="">
+      <div className="home">
         <div>
           <div>
+            <div className="home_navbar">
+              <NavBar />
+            </div>
             <h1 className="title">Webpage Viewer</h1>
             <div>
-              <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Enter URL" />
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="Enter URL"
+              />
             </div>
             <div>{url && <FetchWebsite url={url} />}</div>
           </div>
@@ -195,50 +197,55 @@ const Home = () => {
             Send email
           </button>
         </div>
-          <div>
-
-          </div>
+        <div></div>
 
         {sadFeedback ? (
-                <div className={`fixed w-[100%] top-[50%] h-[100%] rounded-md p-[5px] m-1 ml-[70%] bg-[#fbe9e7]`}>
+          <div
+            className={`fixed w-[100%] top-[50%] h-[100%] rounded-md p-[5px] m-1 ml-[70%] bg-[#fbe9e7]`}
+          >
+            <iframe
+              data-tally-src="https://tally.so/embed/mBprE7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy"
+              width="30%"
+              height="446"
+              frameBorder="0"
+              title="Feedback"
+            ></iframe>
 
-                  <iframe data-tally-src="https://tally.so/embed/mBprE7?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="30%" height="446" frameBorder="0"   title="Feedback"></iframe>
-
-                  <Script
-                      id="tally-js"
-                      src="https://tally.so/widgets/embed.js"
-                      onLoad={() => {
-                        // @ts-ignore
-                        Tally.loadEmbeds();
-                      }}
-                  />
-                </div>
-
+            <Script
+              id="tally-js"
+              src="https://tally.so/widgets/embed.js"
+              onLoad={() => {
+                // @ts-ignore
+                Tally.loadEmbeds();
+              }}
+            />
+          </div>
         ) : (
-            <div className={`fixed w-[16%] top-[93%] h-[5%] rounded-md p-[5px] m-1 ml-[80%] ${(changeColor === true)? 'bg-[#e8fcd7]':'bg-[#e6fafb]'}`}>
-              <feedback-component onClick={handleFeedback}>
+          <div
+            className={`fixed w-[16%] top-[93%] h-[5%] rounded-md p-[5px] m-1 ml-[80%] ${
+              changeColor === true ? "bg-[#e8fcd7]" : "bg-[#e6fafb]"
+            }`}
+          >
+            <div onClick={handleFeedback}>
               <span slot="cta" className="text-[#003558] m-[3px]">
                 Was this page helpful?
               </span>
-                <span slot="confirmation" className="text-[#4e7a3e]" >
+              <span slot="confirmation" className="text-[#4e7a3e]">
                 Thank you for your feedback!
               </span>
-                <span slot="option-icon:0">
-                  <LikeIconSvg/>
-                </span>
-                <span slot="option-icon:1" onClick={handleBadFeedback}>
-                  <DislikeIconSvg/>
-                </span>
-              </feedback-component>
+              <span slot="option-icon:0">
+                <LikeIconSvg />
+              </span>
+              <span slot="option-icon:1" onClick={handleBadFeedback}>
+                <DislikeIconSvg />
+              </span>
             </div>
+          </div>
         )}
 
-
-          <div>
-            
-          </div>
+        <div></div>
       </div>
-
     </>
   );
 };
