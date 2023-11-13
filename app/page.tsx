@@ -9,6 +9,7 @@ import Link from "next/link";
 import LikeIconSvg from "./components/LikeIconSvg";
 import DislikeIconSvg from "./components/DislikeIconSvg";
 import Script from "next/script";
+import Navbar from "./components/NavBar";
 var feedbackComponent = require("@ramseyinhouse/feedback-component")
 
 declare global {
@@ -183,6 +184,7 @@ const Home = () => {
       <div className="">
         <div>
           <div>
+            <Navbar />
             <h1 className="title">Webpage Viewer</h1>
             <div>
               <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Enter URL" />
