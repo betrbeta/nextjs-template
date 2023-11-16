@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import LikeIconSvg from "../SVGs/LikeIconSvg";
 import DislikeIconSvg from "../SVGs/DislikeIconSvg";
 import {
@@ -22,9 +22,28 @@ declare global {
   }
 }
 
+interface FeedbackMessage {
+  email: string;
+  radio: string;
+  text: string;
+  file: File | null;
+  screenshot: Blob | null;
+}
+
+const initialState: FeedbackMessage = {
+  email: "",
+  radio: "",
+  text: "",
+  file: null,
+  screenshot: null,
+};
+
 export const Feedback = () => {
   // const [sadFeedback, setSadFeedback] = useState(false);
   const [changeColor, setChangeColor] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [blob, setBlob] = useState("");
+  const [message, setMessage] = useState(initialState);
 
   const handleFeedback = () => {
     setChangeColor(!changeColor);
@@ -34,10 +53,6 @@ export const Feedback = () => {
     setOpenModal(true);
   };
 
-  const [openModal, setOpenModal] = useState(false);
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const [blob, setBlob] = useState("");
-
   async function capture() {
     const mediaDevices = navigator.mediaDevices as any;
     const stream = await mediaDevices.getDisplayMedia({
@@ -46,7 +61,7 @@ export const Feedback = () => {
 
     const vid = document.createElement("video");
 
-    vid.addEventListener("loadedmetadata", function () {
+    vid.addEventListener("loadedmetadata", async function () {
       const canvas = document.createElement("canvas"),
         ctx: any = canvas.getContext("2d");
       ctx.canvas.width = vid.videoWidth;
@@ -58,10 +73,24 @@ export const Feedback = () => {
       let a = document.createElement("a");
       a.href = canvas.toDataURL("image/png");
       setBlob(a.href);
+      const blobForMessage: Blob = await new Promise((resolve: any) =>
+        canvas.toBlob(resolve, "image/png")
+      );
+      setMessage((prev) => ({
+        ...prev,
+        screenshot: blobForMessage,
+      }));
     });
 
     vid.srcObject = stream;
     vid.play();
+  }
+
+  function handleSubmit() {
+    console.log(message);
+    setMessage(initialState);
+    setBlob("");
+    setOpenModal(false);
   }
 
   return (
@@ -71,14 +100,24 @@ export const Feedback = () => {
           show={openModal}
           size="md"
           popup
-          onClose={() => setOpenModal(false)}
-          initialFocus={emailInputRef}
+          onClose={() => {
+            setOpenModal(false);
+            setBlob("");
+          }}
         >
           <Modal.Header />
           <Modal.Body>
-            <img src={blob} width="200px" />
             <div className="flex max-w-md flex-col gap-4">
-              <fieldset className="flex max-w-md flex-col gap-4">
+              <fieldset
+                className="flex max-w-md flex-col gap-4"
+                onChange={(event) => {
+                  const target = event.target as HTMLInputElement;
+                  setMessage((prev) => ({
+                    ...prev,
+                    radio: target.value,
+                  }));
+                }}
+              >
                 <legend className="mb-4 text-xl font-medium text-gray-900">
                   We're sorry to hear that. How could we improve it?
                 </legend>
@@ -87,7 +126,7 @@ export const Feedback = () => {
                     id="missing"
                     name="radio"
                     value="missing"
-                    defaultChecked
+                    // defaultChecked
                   />
                   <Label htmlFor="missing">It has missing information</Label>
                 </div>
@@ -103,50 +142,76 @@ export const Feedback = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Radio id="else" name="radio" value="else" />
-                  <Label htmlFor="uk">Something else</Label>
-                </div>
-                <div className="max-w-md">
-                  <div className="mb-2 block">
-                    <Label htmlFor="comment" value="Your message" />
-                  </div>
-                  <Textarea
-                    id="comment"
-                    placeholder="Leave a comment..."
-                    required
-                    rows={4}
-                  />
+                  <Label htmlFor="else">Something else</Label>
                 </div>
               </fieldset>
+              <div className="max-w-md">
+                <div className="mb-2 block">
+                  <Label htmlFor="comment" value="Your message" />
+                </div>
+                <Textarea
+                  id="comment"
+                  placeholder="Leave a comment..."
+                  required
+                  rows={4}
+                  onChange={(event) =>
+                    setMessage((prev) => ({
+                      ...prev,
+                      text: event.target.value,
+                    }))
+                  }
+                />
+              </div>
               <div id="fileUpload" className="max-w-md">
                 <div className="mb-2 block">
                   <Label htmlFor="file" value="Upload file" />
                 </div>
                 <FileInput
                   id="file"
-                  helperText="A file providing is useful to understand problem within"
+                  helperText="File providing is useful to understand problem within"
+                  onChange={(event) =>
+                    setMessage((prev) => ({
+                      ...prev,
+                      file: event.target.files ? event.target.files[0] : null,
+                    }))
+                  }
                 />
               </div>
               <div id="screenshootUpload" className="max-w-md">
                 <div className="mb-2 block">
                   <Label htmlFor="screenshoot" value="Upload screenshoot" />
                 </div>
-                <FileInput
-                  id="screenshot"
-                  helperText="Screenshoot is useful to understand realview problem"
-                />
-                <Button onClick={() => capture()}></Button>
-                <div>
+                <div className="mb-5">
+                  <Button
+                    className="w-full"
+                    onClick={() => (blob === "" ? capture() : setBlob(""))}
+                  >
+                    {blob === "" ? "Upload screenshoot" : "Reset screenshot"}
+                  </Button>
+                  <p>Screenshoot is useful to understand problem</p>
+                  {blob !== "" && (
+                    <img id="screenshot" src={blob} className="w-full" />
+                  )}
+                </div>
+                <div className="mb-4 pt-4 block w-full relative before:content-[''] before:w-full before:h-[2px] before:bg-[#330033] before:absolute before:top-0 before:left-0">
                   <div className="mb-2 block">
                     <Label htmlFor="email" value="Your email" />
                   </div>
                   <TextInput
                     id="email"
-                    ref={emailInputRef}
                     placeholder="name@company.com"
                     required
+                    onChange={(event) =>
+                      setMessage((prev) => ({
+                        ...prev,
+                        email: event.target.value,
+                      }))
+                    }
                   />
                 </div>
-                <Button type="submit">Send feedback to BetrBeta</Button>
+                <Button className="w-full" type="submit" onClick={handleSubmit}>
+                  Send feedback to BetrBeta
+                </Button>
               </div>
             </div>
           </Modal.Body>
