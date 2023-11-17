@@ -10,7 +10,6 @@ import {
   Radio,
   FileInput,
 } from "flowbite-react";
-import FeedbackComponent from "@ramseyinhouse/feedback-component";
 
 declare global {
   namespace React.JSX {
@@ -52,8 +51,6 @@ export const Feedback = () => {
   const handleBadFeedback = () => {
     setOpenModal(true);
   };
-  const feedbackComponent = new FeedbackComponent();
-  console.log(feedbackComponent);
 
   async function capture() {
     const mediaDevices = navigator.mediaDevices as any;
