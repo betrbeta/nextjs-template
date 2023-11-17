@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-create a .env file from the .env.template file (OPTIONAL: modify as desired for your local situation)
+create a .env file from the .env_template file (OPTIONAL: modify as desired for your local situation)
 
 First, run the development server:
 

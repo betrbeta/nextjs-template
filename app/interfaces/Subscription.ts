@@ -1,5 +1,5 @@
 //Subscription checker
-export default interface Subscription {
+export default interface SubscriptionModel {
   orderId: number;
   subscriptionName: string;
   paymentCycle: string;
