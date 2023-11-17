@@ -10,9 +10,10 @@ import {
   Radio,
   FileInput,
 } from "flowbite-react";
+let FeedbackComponent = require("@ramseyinhouse/feedback-component");
 
 declare global {
-  namespace JSX {
+  namespace React.JSX {
     interface IntrinsicElements {
       ["feedback-component"]: React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement>,
@@ -39,7 +40,6 @@ const initialState: FeedbackMessage = {
 };
 
 export const Feedback = () => {
-  // const [sadFeedback, setSadFeedback] = useState(false);
   const [changeColor, setChangeColor] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [blob, setBlob] = useState("");
@@ -97,6 +97,8 @@ export const Feedback = () => {
     <>
       {openModal ? (
         <Modal
+          className="transition-all"
+          dismissible
           show={openModal}
           size="md"
           popup
@@ -150,6 +152,7 @@ export const Feedback = () => {
                   <Label htmlFor="comment" value="Your message" />
                 </div>
                 <Textarea
+                  className="p-[10px] !outline-none"
                   id="comment"
                   placeholder="Leave a comment..."
                   required
@@ -167,6 +170,7 @@ export const Feedback = () => {
                   <Label htmlFor="file" value="Upload file" />
                 </div>
                 <FileInput
+                  className="file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-medium file:bg-stone-50 file:text-stone-700 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700"
                   id="file"
                   helperText="File providing is useful to understand problem within"
                   onChange={(event) =>
@@ -181,8 +185,9 @@ export const Feedback = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="screenshoot" value="Upload screenshoot" />
                 </div>
-                <div className="mb-5">
+                <div>
                   <Button
+                    color="purple"
                     className="w-full"
                     onClick={() => (blob === "" ? capture() : setBlob(""))}
                   >
@@ -193,7 +198,8 @@ export const Feedback = () => {
                     <img id="screenshot" src={blob} className="w-full" />
                   )}
                 </div>
-                <div className="mb-4 pt-4 block w-full relative before:content-[''] before:w-full before:h-[2px] before:bg-[#330033] before:absolute before:top-0 before:left-0">
+                <hr className="h-px my-8 bg-[#330033] opacity-50 border-0"></hr>
+                <div className="mb-4 block w-full">
                   <div className="mb-2 block">
                     <Label htmlFor="email" value="Your email" />
                   </div>
@@ -209,7 +215,12 @@ export const Feedback = () => {
                     }
                   />
                 </div>
-                <Button className="w-full" type="submit" onClick={handleSubmit}>
+                <Button
+                  color="purple"
+                  className="w-full"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
                   Send feedback to BetrBeta
                 </Button>
               </div>
@@ -218,7 +229,7 @@ export const Feedback = () => {
         </Modal>
       ) : (
         <div
-          className={`fixed w-fit bottom-[5%] h-fit rounded-md p-[5px] right-[5%] ${
+          className={`fixed w-fit bottom-[5%] h-fit rounded-md p-[5px] right-[5%] transition-all ${
             changeColor === true ? "bg-[#e8fcd7]" : "bg-[#e6fafb]"
           }`}
         >

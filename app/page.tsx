@@ -2,7 +2,6 @@
 
 import React, { useState, ChangeEvent } from "react";
 import "./styles/style.css";
-
 import CookieBanner from "./components/CookiesBanner/CookiesBanner";
 import Link from "next/link";
 import { FetchWebsite } from "./components/FetchWebsite/FetchWebsite";
