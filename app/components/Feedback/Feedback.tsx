@@ -52,8 +52,9 @@ export const Feedback = () => {
   const handleBadFeedback = () => {
     setOpenModal(true);
   };
+  const feedbackComponent = new FeedbackComponent();
+  console.log(feedbackComponent);
 
-  console.log(FeedbackComponent);
   async function capture() {
     const mediaDevices = navigator.mediaDevices as any;
     const stream = await mediaDevices.getDisplayMedia({
@@ -81,6 +82,8 @@ export const Feedback = () => {
         ...prev,
         screenshot: blobForMessage,
       }));
+      (document.getElementById("modal") as HTMLDivElement).style.visibility =
+        "visible";
     });
 
     vid.srcObject = stream;
@@ -98,6 +101,7 @@ export const Feedback = () => {
     <>
       {openModal ? (
         <Modal
+          id="modal"
           className="transition-all"
           dismissible
           show={openModal}
@@ -190,7 +194,16 @@ export const Feedback = () => {
                   <Button
                     color="purple"
                     className="w-full"
-                    onClick={() => (blob === "" ? capture() : setBlob(""))}
+                    onClick={(e: React.MouseEvent) => {
+                      if (blob === "") {
+                        (
+                          document.getElementById("modal") as HTMLDivElement
+                        ).style.visibility = "hidden";
+                        capture();
+                      } else {
+                        setBlob("");
+                      }
+                    }}
                   >
                     {blob === "" ? "Upload screenshoot" : "Reset screenshot"}
                   </Button>
