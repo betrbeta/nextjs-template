@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import "../styles/feedback.css";
 
 interface FeedbackMessage {
@@ -43,6 +43,114 @@ const Feedback = () => {
       setConfirmed(false);
     }
   }
+
+  useEffect(() => {
+    (() => {
+      //   let code;
+      (document.getElementById("captcha") as HTMLDivElement).innerHTML = "";
+      const charsArray = "0123456789abcdefghijklmnopqrstuvwxyz"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*
+      const lengthOtp = 6;
+      let captcha = [];
+      for (let i = 0; i < lengthOtp; i++) {
+        const index = Math.floor(Math.random() * charsArray.length + 1);
+        // if (captcha.indexOf(charsArray[index]) === -1)
+        captcha.push(charsArray[index]);
+        // else i--;
+      }
+      setSecret(captcha.join(""));
+      const canvas = document.createElement("canvas");
+      canvas.id = "captcha";
+      canvas.width = 200;
+      canvas.height = 70;
+      const x = canvas.width / 2;
+      const context: any = canvas.getContext("2d");
+      const gradient = context.createLinearGradient(100, 20, 200, 70);
+      gradient.addColorStop(0, "#fff");
+      gradient.addColorStop(1, "#767676");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 200, 70);
+
+      let startFirst = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      let cp1First = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      let cp2First = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      let endFirst = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(startFirst.x, startFirst.y);
+      context.bezierCurveTo(
+        cp1First.x,
+        cp1First.y,
+        cp2First.x,
+        cp2First.y,
+        endFirst.x,
+        endFirst.y
+      );
+      context.stroke();
+
+      let startSecond = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      let cp1Second = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      let cp2Second = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      let endSecond = {
+        x: Math.floor(Math.random() * 200),
+        y: Math.floor(Math.random() * 70),
+      };
+      context.lineWidth = 4;
+      context.beginPath();
+      context.moveTo(startSecond.x, startSecond.y);
+      context.bezierCurveTo(
+        cp1Second.x,
+        cp1Second.y,
+        cp2Second.x,
+        cp2Second.y,
+        endSecond.x,
+        endSecond.y
+      );
+      context.stroke();
+
+      context.font = "bold 48px sans-serif";
+      context.fillStyle = "#000";
+      context.textAlign = "center";
+      context.shadowColor = "#000";
+      context.shadowBlur = 5;
+      context.shadowOffsetX =
+        Math.random() > 0.5
+          ? Math.floor(Math.random() * 10) * -1
+          : Math.floor(Math.random() * 10);
+      context.shadowOffsetY =
+        Math.random() > 0.5
+          ? Math.floor(Math.random() * 10) * -1
+          : Math.floor(Math.random() * 10);
+      //   context.moveTo(x, 0);
+      context.fillText(captcha.join(""), x, 45);
+      //   context.strokeText(captcha.join(""));
+      //   code = captcha.join("");
+      (document.getElementById("captcha") as HTMLCanvasElement).appendChild(
+        canvas
+      ); // adds the canvas to the body element
+    })();
+  }, []);
+
   return (
     <form className="w-[730px]">
       {confirmed === false && (
@@ -129,6 +237,8 @@ const Feedback = () => {
           audio. This enables us to prevent automated or scripted feedback
           submissions.
         </label>
+        <div id="captcha"></div>
+        <div id="captchaAudio"></div>
         <input
           type="text"
           value={confirmSecret}
