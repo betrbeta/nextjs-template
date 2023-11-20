@@ -247,7 +247,7 @@ export const Feedback = () => {
           <feedback-component onClick={handleFeedback}>
             <span
               slot="cta"
-              className="text-[#003558] m-[3px] whitespace-nowrap"
+              className="text-[#003558] m-[3px] whitespace-nowrap visible"
             >
               Was this page helpful?
             </span>
