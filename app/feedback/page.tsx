@@ -337,22 +337,41 @@ const Feedback = () => {
                 audio. This enables us to prevent automated or scripted feedback
                 submissions.
               </label>
-              <div className="flex mb-[10px] items-center justify-items-start">
+              <div className="flex relative mb-[10px] items-center justify-items-start">
                 <div id="captcha" className="my-[10px]"></div>
                 <div
                   id="captchaAudio"
-                  className="flex items-center justify-items-start my-[10px] ml-[10px] w-[280px] h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
+                  className="flex items-center justify-items-start my-[10px] ml-[10px] w-full h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
                 >
                   <button>
                     <PlayIconSvg />
                   </button>
                   <div className="whitespace-nowrap">0:00</div>
                   <div className="whitespace-nowrap"> / 0:00</div>
-                  <input type="range" />
-                  <input type="range" />
-                  <button>
-                    <VolumeIconSvg />
-                  </button>
+                  <input
+                    // className="appearance-none items-center bg-[#767676] cursor-pointer accent-red-500 w-full py-[14px] px-[16px] transition-opacity bg-transparent"
+                    type="range"
+                    min="0"
+                    step="0.1"
+                    aria-label="audio time scrubber"
+                    aria-valuetext="elapsed time: 0:00"
+                  />
+                  <div
+                    className="absolute top-[11px] right-0 flex justify-items-end rounded-full overflow-hidden w-[32px] h-[32px] transition-all duration-300  
+                ease-out hover:bg-[#D3D3D3] hover:w-[100px]"
+                  >
+                    <input
+                      type="range"
+                      className="block absolute top-0 right-[32px]"
+                      // className="appearance-none bg-[#767676] rounded-full [&::-webkit-slider-runnable-track]:h-[4px] [&::-webkit-slider-runnable-track]:w-[30px] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[14px] [&::-webkit-slider-thumb]:w-[14px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer"
+                    />
+                    <button
+                      type="button"
+                      className="cursor-pointer block absolute top-[4px] right-0"
+                    >
+                      <VolumeIconSvg />
+                    </button>
+                  </div>
                 </div>
               </div>
               <input
