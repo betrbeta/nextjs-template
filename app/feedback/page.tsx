@@ -175,17 +175,21 @@ const Feedback = () => {
 
   return (
     <div className="bg-white h-full text-[14px] font-normal">
-      <div className="feedback__header bg-[#16191F] py-[20px] px-[30px]">
+      <div className="feedback__header bg-[#16191F] py-[20px] px-[30px] fixed top-0 left-0 w-screen">
         <Link className="w-fit block" href={"./feedback"}>
           <Image src={image} alt={"logo AWS"} width={"58"} height={"35"} />
         </Link>
       </div>
       {confirmed === "sent" ? (
-        <div className="flex bg-white text-black m-[30px] h-screen">
+        <div
+          className={`flex bg-white text-black p-[30px] mt-[75px] h-[${
+            window.innerHeight - 75
+          }px]`}
+        >
           <h2>Your feedback was sent!</h2>
         </div>
       ) : (
-        <div className="flex bg-white text-black m-[30px]">
+        <div className="flex bg-white text-black p-[30px] mt-[75px]">
           <form className="w-5/6 w-[730px] mr-[20px]" onSubmit={handleSubmit}>
             <h2 className="feedback__title py-[5px] text-[28px] font-normal">
               AWS Command Line Interface Documentation Feedback
