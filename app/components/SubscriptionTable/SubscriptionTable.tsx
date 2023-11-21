@@ -1,7 +1,7 @@
 "use client";
 import React, { FC } from "react";
-import Props from "../interfaces/Props";
-import "../styles/subscription.css";
+import Props from "../../interfaces/Props";
+import "../../styles/subscription.css";
 
 const SubscriptionsTable: FC<Props> = (props) => {
   const { subscriptions } = props;
