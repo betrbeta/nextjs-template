@@ -128,7 +128,7 @@ export const SendEmail = () => {
         placeholder="Write text here ..."
       />
       <input
-        className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-0"
+        className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-0 border-r-0 border-l-0"
         type="email"
         name="email"
         value={state.email}
