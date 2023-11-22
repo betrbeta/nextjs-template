@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PlayIconSvg from "../components/SVGs/PlayIconSvg";
 import VolumeIconSvg from "../components/SVGs/VolumeIconSvg";
+import tts from "../api/tts/tts";
 
 interface FeedbackMessage {
   issue: string;
@@ -38,6 +39,7 @@ const Feedback = () => {
   const [confirmed, setConfirmed] = useState<string>("");
   const [errorIssue, setErrorIssue] = useState<Boolean>(false);
   const [errorBetter, setErrorBetter] = useState<Boolean>(false);
+  const [audio, setAudio] = useState<any>(null);
 
   function handleSubmit(event: React.FormEvent) {
     console.log("confirmSecret ", confirmSecret);
@@ -67,7 +69,7 @@ const Feedback = () => {
   }
 
   useEffect(() => {
-    (() => {
+    (async () => {
       //   let code;
       (document.getElementById("captcha") as HTMLDivElement).innerHTML = "";
       const charsArray = "0123456789abcdefghijklmnopqrstuvwxyz"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*
@@ -170,6 +172,9 @@ const Feedback = () => {
       (document.getElementById("captcha") as HTMLCanvasElement).appendChild(
         canvas
       ); // adds the canvas to the body element
+
+      const b64 = await tts(captcha.join(""));
+      setAudio(b64);
     })();
   }, []);
 
@@ -337,13 +342,22 @@ const Feedback = () => {
                 audio. This enables us to prevent automated or scripted feedback
                 submissions.
               </label>
-              <div className="flex relative mb-[10px] items-center justify-items-start">
+              <div className="flex relative mb-[10px] items-center justify-start">
                 <div id="captcha" className="my-[10px]"></div>
                 <div
                   id="captchaAudio"
-                  className="flex items-center justify-items-start my-[10px] ml-[10px] w-full h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
+                  className="flex items-center justify-start my-[10px] ml-[10px] w-full h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
                 >
-                  <button>
+                  <audio
+                    src={audio}
+                    autoPlay
+                    className="block bg-black w-[100px] h-[100px]"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => document.querySelector("audio")?.play()}
+                  >
                     <PlayIconSvg />
                   </button>
                   <div className="whitespace-nowrap">0:00</div>
@@ -357,7 +371,7 @@ const Feedback = () => {
                     aria-valuetext="elapsed time: 0:00"
                   />
                   <div
-                    className="absolute top-[11px] right-0 flex justify-items-end rounded-full overflow-hidden w-[32px] h-[32px] transition-all duration-300  
+                    className="absolute top-[11px] right-0 flex justify-end rounded-full overflow-hidden w-[32px] h-[32px] transition-all duration-300  
                 ease-out hover:bg-[#D3D3D3] hover:w-[100px]"
                   >
                     <input

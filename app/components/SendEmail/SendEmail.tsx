@@ -2,17 +2,17 @@ import { useState } from "react";
 
 export const SendEmail = () => {
   const [email, setEmail] = useState<string>("");
+
   async function createTemplate() {
     const options = {
       method: "POST",
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        "api-key":
-          "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",
+        "api-key": `${process.env.NEXT_PUBLIC_MAILER_APIKEY}`,
       },
       body: JSON.stringify({
-        sender: { email: "savytskyimark@gmail.com" },
+        sender: { email: "rudenko.sergey.v@gmail.com" },
         templateName: "emailConfirmation",
         htmlContent: `<div
       style="
@@ -79,8 +79,7 @@ export const SendEmail = () => {
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        "api-key":
-          "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",
+        "api-key": `${process.env.NEXT_PUBLIC_MAILER_APIKEY}`,
       },
       body: JSON.stringify({
         to: [{ email: `${email}` }],
