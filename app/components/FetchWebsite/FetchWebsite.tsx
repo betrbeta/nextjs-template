@@ -4,7 +4,7 @@ import mixpanel from "../../../config/mixpanel";
 export const FetchWebsite = ({ url }: { url: string }) => {
   const [hasError, setHasError] = useState(false);
 
-  const href = new URL(`https://${url}`).href;
+  const href = url.includes("http") ? url : new URL(`https://${url}`).href;
 
   useEffect(() => {
     const abortController = new AbortController();
