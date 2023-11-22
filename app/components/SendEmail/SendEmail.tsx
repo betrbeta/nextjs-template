@@ -1,17 +1,7 @@
 import { useState } from "react";
 
-type State = {
-  text: string;
-  email: string;
-};
-
-let initialState: State = {
-  text: "",
-  email: "",
-};
-
 export const SendEmail = () => {
-  const [state, setState] = useState(initialState);
+  const [email, setEmail] = useState<string>("");
   async function createTemplate() {
     const options = {
       method: "POST",
@@ -77,7 +67,6 @@ export const SendEmail = () => {
         isActive: true,
       }),
     };
-
     fetch("https://api.brevo.com/v3/smtp/templates", options)
       .then((response) => response.json())
       .then(({ id }) => sendEmail(id))
@@ -94,7 +83,7 @@ export const SendEmail = () => {
           "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",
       },
       body: JSON.stringify({
-        to: [{ email: "dorozhe.zolota777@gmail.com" }],
+        to: [{ email: `${email}` }],
         templateId: id,
       }),
     };
@@ -107,38 +96,23 @@ export const SendEmail = () => {
 
   const handleSendEmail = () => {
     createTemplate();
+    setEmail("");
   };
-  // event.target.value === ""
-  //   ? alert(`Field ${event.target.name} cannot be empty!`)
-  //   :
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.name === "text"
-      ? setState((prev) => ({ ...prev, ["text"]: event.target.value }))
-      : setState((prev) => ({ ...prev, ["email"]: event.target.value }));
-  };
-  // console.log(state);
+
   return (
     <div className="flex justify-center items-center transition-all">
       <input
-        className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-s-[22px]"
-        type="text"
-        name="text"
-        value={state.text}
-        onChange={handleChange}
-        placeholder="Write text here ..."
-      />
-      <input
-        className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-0 border-r-0 border-l-0"
+        className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-s-[22px] border-r-0 border-l-0"
         type="email"
         name="email"
-        value={state.email}
-        onChange={handleChange}
+        value={email}
+        onChange={(event) => setEmail(event.currentTarget.value)}
         placeholder="Write E-mail here ..."
       />
       <button
         type="submit"
         className="px-6 py-3 text-white whitespace-nowrap transition-all hover:bg-white hover:text-[#330033] rounded-e-[22px] border-[3px] border-black border-solid"
-        onSubmit={handleSendEmail}
+        onClick={handleSendEmail}
       >
         Send mail
       </button>
