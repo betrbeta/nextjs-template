@@ -45,6 +45,7 @@ const Feedback = () => {
   const [play, setPlay] = useState<Boolean>(false);
   const [volumeOff, setVolumeOff] = useState<Boolean>(false);
   const [volume, setVolume] = useState<number>(0.5);
+  const [range, setRange] = useState<number>(0);
 
   function handleSubmit(event: React.FormEvent) {
     console.log("confirmSecret ", confirmSecret);
@@ -72,6 +73,15 @@ const Feedback = () => {
       setConfirmed("wrong");
     }
   }
+
+  useEffect(() => {
+    const audio = document.querySelector("audio") as HTMLMediaElement;
+    const digit = (
+      (Number(audio?.currentTime) / Number(audio?.duration)) *
+      100
+    ).toFixed(0);
+    setRange(Number(digit));
+  }, [audio?.duration]);
 
   useEffect(() => {
     (async () => {
@@ -185,8 +195,15 @@ const Feedback = () => {
 
   const handleClickVolume = () => {
     setVolumeOff(!volumeOff);
-    const mute = document.querySelector("audio") as HTMLMediaElement;
-    mute.volume = mute.volume !== 0 ? 0 : volume;
+    const audio = document.querySelector("audio") as HTMLMediaElement;
+    audio.volume = audio.volume !== 0 ? 0 : volume;
+  };
+
+  const handleClickPlay = () => {
+    setPlay(!play);
+    const audio = document.querySelector("audio") as HTMLMediaElement;
+    !play ? audio.play() : audio.pause();
+    // mute.volume = mute.volume !== 0 ? 0 : volume;
   };
 
   return (
@@ -368,22 +385,32 @@ const Feedback = () => {
                   <button
                     className="rounded-full hover:bg-[#D3D3D3] w-[32px] h-[32px] p-[4px]"
                     type="button"
-                    onClick={() => document.querySelector("audio")?.play()}
+                    onClick={handleClickPlay}
                   >
                     {play ? <PouseIconSvg /> : <PlayIconSvg />}
                   </button>
-                  <div className="whitespace-nowrap ml-[5px]">0:00</div>
-                  <div className="whitespace-nowrap ml-[5px]"> / 0:00</div>
+                  <div className="whitespace-nowrap ml-[5px]">
+                    {(
+                      document.querySelector("audio") as HTMLMediaElement
+                    )?.currentTime.toFixed(2)}
+                  </div>
+                  <div className="whitespace-nowrap ml-[5px]">{` / ${(
+                    document.querySelector("audio") as HTMLMediaElement
+                  )?.duration.toFixed(2)}`}</div>
                   <input
                     className="range"
                     type="range"
+                    value={range}
                     min={0}
                     step={0.01}
                     max={1}
                     aria-label="audio time scrubber"
                     aria-valuetext="elapsed time: 0:00"
                     onChange={(event) => {
-                      setVolume(Number(event.currentTarget.value));
+                      setRange(Number(event.currentTarget.value));
+                      // (
+                      //   document.querySelector("audio") as HTMLMediaElement
+                      // ).volume = Number(event.currentTarget.value);
                     }}
                   />
                   <div
