@@ -5,7 +5,7 @@ export default async function tts(text: string) {
 
   const key = process.env.NEXT_PUBLIC_VOICE_RSS_KEY;
   const options: any = {
-    url: `https://api.voicerss.org/?key=${key}&hl=en-us&b64=true&src=${text}`,
+    url: `https://api.voicerss.org/?key=${key}&hl=en-us&b64=true&src=please, type the numbers you hear: ${text}`,
     method: "GET",
     mode: "no-cors",
     headers: {

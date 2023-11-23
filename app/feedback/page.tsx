@@ -5,7 +5,9 @@ import image from "../../assets/images/aws_logo_dark.png";
 import Image from "next/image";
 import Link from "next/link";
 import PlayIconSvg from "../components/SVGs/PlayIconSvg";
+import PouseIconSvg from "../components/SVGs/PouseIconSvg";
 import VolumeIconSvg from "../components/SVGs/VolumeIconSvg";
+import VolumeOffIconSvg from "../components/SVGs/VolumeOffIconSvg";
 import tts from "../api/tts/tts";
 
 interface FeedbackMessage {
@@ -40,6 +42,9 @@ const Feedback = () => {
   const [errorIssue, setErrorIssue] = useState<Boolean>(false);
   const [errorBetter, setErrorBetter] = useState<Boolean>(false);
   const [audio, setAudio] = useState<any>(null);
+  const [play, setPlay] = useState<Boolean>(false);
+  const [volumeOff, setVolumeOff] = useState<Boolean>(false);
+  const [volume, setVolume] = useState<number>(0.5);
 
   function handleSubmit(event: React.FormEvent) {
     console.log("confirmSecret ", confirmSecret);
@@ -173,10 +178,16 @@ const Feedback = () => {
         canvas
       ); // adds the canvas to the body element
 
-      const b64 = await tts(captcha.join(""));
+      const b64 = await tts(captcha.join(","));
       setAudio(b64);
     })();
   }, []);
+
+  const handleClickVolume = () => {
+    setVolumeOff(!volumeOff);
+    const mute = document.querySelector("audio") as HTMLMediaElement;
+    mute.volume = mute.volume !== 0 ? 0 : volume;
+  };
 
   return (
     <div className="bg-white h-full text-[14px] font-normal">
@@ -195,7 +206,7 @@ const Feedback = () => {
         </div>
       ) : (
         <div className="flex bg-white text-black p-[30px] mt-[75px]">
-          <form className="w-5/6 w-[730px] mr-[20px]" onSubmit={handleSubmit}>
+          <form className="w-5/6 mr-[20px]" onSubmit={handleSubmit}>
             <h2 className="feedback__title py-[5px] text-[28px] font-normal">
               AWS Command Line Interface Documentation Feedback
             </h2>
@@ -342,11 +353,11 @@ const Feedback = () => {
                 audio. This enables us to prevent automated or scripted feedback
                 submissions.
               </label>
-              <div className="flex relative mb-[10px] items-center justify-start">
+              <div className="flex mb-[10px] items-center justify-start">
                 <div id="captcha" className="my-[10px]"></div>
                 <div
                   id="captchaAudio"
-                  className="flex items-center justify-start my-[10px] ml-[10px] w-full h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
+                  className="relative flex items-center justify-start my-[10px] ml-[10px] w-[300px] h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
                 >
                   <audio
                     src={audio}
@@ -355,35 +366,52 @@ const Feedback = () => {
                   />
 
                   <button
+                    className="rounded-full hover:bg-[#D3D3D3] w-[32px] h-[32px] p-[4px]"
                     type="button"
                     onClick={() => document.querySelector("audio")?.play()}
                   >
-                    <PlayIconSvg />
+                    {play ? <PouseIconSvg /> : <PlayIconSvg />}
                   </button>
-                  <div className="whitespace-nowrap">0:00</div>
-                  <div className="whitespace-nowrap"> / 0:00</div>
+                  <div className="whitespace-nowrap ml-[5px]">0:00</div>
+                  <div className="whitespace-nowrap ml-[5px]"> / 0:00</div>
                   <input
-                    // className="appearance-none items-center bg-[#767676] cursor-pointer accent-red-500 w-full py-[14px] px-[16px] transition-opacity bg-transparent"
+                    className="range"
                     type="range"
-                    min="0"
-                    step="0.1"
+                    min={0}
+                    step={0.01}
+                    max={1}
                     aria-label="audio time scrubber"
                     aria-valuetext="elapsed time: 0:00"
+                    onChange={(event) => {
+                      setVolume(Number(event.currentTarget.value));
+                    }}
                   />
                   <div
-                    className="absolute top-[11px] right-0 flex justify-end rounded-full overflow-hidden w-[32px] h-[32px] transition-all duration-300  
-                ease-out hover:bg-[#D3D3D3] hover:w-[100px]"
+                    className="flex justify-end rounded-full overflow-hidden w-[32px] h-[32px] transition-all duration-300 
+                ease-out hover:bg-[#D3D3D3] hover:w-[300px]"
                   >
                     <input
                       type="range"
-                      className="block absolute top-0 right-[32px]"
-                      // className="appearance-none bg-[#767676] rounded-full [&::-webkit-slider-runnable-track]:h-[4px] [&::-webkit-slider-runnable-track]:w-[30px] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[14px] [&::-webkit-slider-thumb]:w-[14px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer"
+                      className="volume"
+                      value={volume}
+                      min={0}
+                      step={0.01}
+                      max={1}
+                      aria-label="audio volume scrubber"
+                      aria-valuetext="elapsed volume: 50%"
+                      onChange={(event) => {
+                        setVolume(Number(event.currentTarget.value));
+                        (
+                          document.querySelector("audio") as HTMLMediaElement
+                        ).volume = Number(event.currentTarget.value);
+                      }}
                     />
                     <button
+                      onClick={handleClickVolume}
                       type="button"
-                      className="cursor-pointer block absolute top-[4px] right-0"
+                      className="rounded-full w-[32px] h-[32px] p-[4px]"
                     >
-                      <VolumeIconSvg />
+                      {volumeOff ? <VolumeOffIconSvg /> : <VolumeIconSvg />}
                     </button>
                   </div>
                 </div>
