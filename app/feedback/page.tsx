@@ -41,11 +41,15 @@ const Feedback = () => {
   const [confirmed, setConfirmed] = useState<string>("");
   const [errorIssue, setErrorIssue] = useState<Boolean>(false);
   const [errorBetter, setErrorBetter] = useState<Boolean>(false);
+  const [errorConfirm, setErrorConfirm] = useState<Boolean>(false);
   const [audio, setAudio] = useState<any>(null);
-  const [play, setPlay] = useState<Boolean>(false);
+  const [playState, setPlayState] = useState<string>("play");
   const [volumeOff, setVolumeOff] = useState<Boolean>(false);
   const [volume, setVolume] = useState<number>(0.5);
   const [range, setRange] = useState<number>(0);
+  const [duration, setDuration] = useState<string>("");
+  const [currentTime, setCurrentTime] = useState<string>("");
+  const [max, setMax] = useState<number>(0);
 
   function handleSubmit(event: React.FormEvent) {
     console.log("confirmSecret ", confirmSecret);
@@ -70,18 +74,78 @@ const Feedback = () => {
       setMessage(initialState);
       (event.target as HTMLFormElement)?.reset();
     } else {
+      setErrorConfirm(true);
       setConfirmed("wrong");
     }
   }
 
   useEffect(() => {
     const audio = document.querySelector("audio") as HTMLMediaElement;
-    const digit = (
-      (Number(audio?.currentTime) / Number(audio?.duration)) *
-      100
-    ).toFixed(0);
-    setRange(Number(digit));
-  }, [audio?.duration]);
+    if (audio.readyState > 0) {
+      displayDuration(audio);
+      setSliderMax(audio);
+      displayBufferedAmount(audio);
+    } else {
+      audio.addEventListener("loadedmetadata", () => {
+        displayDuration(audio);
+        setSliderMax(audio);
+        displayBufferedAmount(audio);
+      });
+      audio.addEventListener("progress", () => displayBufferedAmount(audio));
+    }
+
+    audio.addEventListener("timeupdate", () => {
+      setRange(Math.floor(audio.currentTime));
+    });
+  }, []);
+
+  const calculateTime = (secs: number) => {
+    const minutes = Math.floor(secs / 60);
+    const seconds = Math.floor(secs % 60);
+    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    return `${minutes}:${returnedSeconds}`;
+  };
+
+  const setSliderMax = (audio: HTMLMediaElement) => {
+    setMax(Math.floor(audio.duration));
+  };
+
+  const displayDuration = (audio: HTMLMediaElement) => {
+    setDuration(calculateTime(audio.duration));
+  };
+
+  const displayBufferedAmount = (audio: HTMLMediaElement) => {
+    // const captchaAudio = document.querySelector("range") as HTMLDivElement;
+    // const bufferedAmount = Math.floor(
+    //   audio.buffered.end(audio.buffered.length - 1)
+    // );
+    // captchaAudio?.style.setProperty(
+    //   "--buffered-width",
+    //   `${(bufferedAmount / max) * 100}%`
+    // );
+  };
+
+  // function onPlaying() {
+  //   const audio = document.querySelector("audio") as HTMLMediaElement;
+  //   // audio.currentTime = range * audio?.duration;
+  //   let count = Math.round(range * 100);
+  //   const interval = setInterval(() => {
+  //     console.log(audio.seeking);
+
+  //     if (count === 100) {
+  //       clearInterval(interval);
+  //     }
+  //     // if (audio.currentTime !== 0) {
+  //     // range !== 0 && audio.currentTime = range * audio?.duration;
+  //     const digit = audio?.currentTime / audio?.duration;
+  //     console.log(digit);
+  //     setRange(Number(digit.toFixed(2)));
+  //     console.log(count);
+  //     count++;
+  //     // }
+  //   }, audio?.duration * 100);
+  // }
+  // console.log(range);
 
   useEffect(() => {
     (async () => {
@@ -200,40 +264,48 @@ const Feedback = () => {
   };
 
   const handleClickPlay = () => {
-    setPlay(!play);
     const audio = document.querySelector("audio") as HTMLMediaElement;
-    !play ? audio.play() : audio.pause();
+    if (playState === "play") {
+      audio.play();
+      // playAnimation.playSegments([14, 27], true);
+      // requestAnimationFrame(whilePlaying);
+      setPlayState("pause");
+    } else {
+      audio.pause();
+      // playAnimation.playSegments([0, 14], true);
+      // cancelAnimationFrame(rAF);
+      setPlayState("play");
+    }
+
+    // setPlay(!play);
+    // !play ? audio.play() : audio.pause();
     // mute.volume = mute.volume !== 0 ? 0 : volume;
   };
 
   return (
-    <div className="bg-white h-full text-[14px] font-normal">
-      <div className="feedback__header bg-[#16191F] py-[20px] px-[30px] fixed top-0 left-0 w-screen">
+    <div className="bg-white h-full min-h-screen text-[14px] font-normal">
+      <header className="feedback__header bg-[#16191F] py-[20px] px-[30px] fixed top-0 left-0 w-screen">
         <Link className="w-fit block" href={"./feedback"}>
           <Image src={image} alt={"logo AWS"} width={"58"} height={"35"} />
         </Link>
-      </div>
+      </header>
       {confirmed === "sent" ? (
-        <div
-          className={`flex bg-white text-black p-[30px] mt-[75px] h-[${
-            window.innerHeight - 75
-          }px]`}
-        >
+        <div className={`flex bg-white text-black p-[30px] mt-[75px]`}>
           <h2>Your feedback was sent!</h2>
         </div>
       ) : (
         <div className="flex bg-white text-black p-[30px] mt-[75px]">
           <form className="w-5/6 mr-[20px]" onSubmit={handleSubmit}>
-            <h2 className="feedback__title py-[5px] text-[28px] font-normal">
-              AWS Command Line Interface Documentation Feedback
-            </h2>
-            <h3 className="py-[5px] text-[18px] font-bold">Topic</h3>
-            <p className="py-[5px] text-[14px] font-normal">
-              http://docs.aws.amazon.com/en_us/cli/latest/userguide/getting-started-install.html
-            </p>
-            <br />
             {confirmed !== "wrong" && (
               <>
+                <h2 className="feedback__title py-[5px] text-[28px] font-normal">
+                  AWS Command Line Interface Documentation Feedback
+                </h2>
+                <h3 className="py-[5px] text-[18px] font-bold">Topic</h3>
+                <p className="py-[5px] text-[14px] font-normal">
+                  http://docs.aws.amazon.com/en_us/cli/latest/userguide/getting-started-install.html
+                </p>
+                <br />
                 <h3>Feedback</h3>
                 <label htmlFor="issues" className="block">
                   Type of issue:
@@ -364,6 +436,15 @@ const Feedback = () => {
               </>
             )}
             <h3 className="py-[5px] text-[18px] font-bold">Security Check</h3>
+            <span
+              className={`${
+                errorConfirm ? "inline" : "hidden"
+              } text-[#d13212] italic font-bold`}
+            >
+              Error: The security check failed. Please try again.
+              <br />
+              <br />
+            </span>
             <div>
               <label htmlFor="confirm">
                 Type the characters in the image or the characters spoken in the
@@ -376,41 +457,45 @@ const Feedback = () => {
                   id="captchaAudio"
                   className="relative flex items-center justify-start my-[10px] ml-[10px] w-[300px] h-[54px] px-[5px] rounded-[100px] bg-[#f1f3f4]"
                 >
-                  <audio
-                    src={audio}
-                    autoPlay
-                    className="block bg-black w-[100px] h-[100px]"
-                  />
+                  <audio src={audio} preload="metadata" />
 
                   <button
                     className="rounded-full hover:bg-[#D3D3D3] w-[32px] h-[32px] p-[4px]"
                     type="button"
                     onClick={handleClickPlay}
                   >
-                    {play ? <PouseIconSvg /> : <PlayIconSvg />}
+                    {playState !== "play" ? <PouseIconSvg /> : <PlayIconSvg />}
                   </button>
                   <div className="whitespace-nowrap ml-[5px]">
-                    {(
-                      document.querySelector("audio") as HTMLMediaElement
-                    )?.currentTime.toFixed(2)}
+                    {currentTime}
                   </div>
-                  <div className="whitespace-nowrap ml-[5px]">{` / ${(
-                    document.querySelector("audio") as HTMLMediaElement
-                  )?.duration.toFixed(2)}`}</div>
+                  <div className="whitespace-nowrap ml-[5px]">{duration}</div>
                   <input
                     className="range"
                     type="range"
                     value={range}
                     min={0}
                     step={0.01}
-                    max={1}
+                    max={max}
                     aria-label="audio time scrubber"
                     aria-valuetext="elapsed time: 0:00"
+                    onInput={(event) => {
+                      setCurrentTime(
+                        calculateTime(Number(event.currentTarget.value))
+                      );
+                      if (!audio.paused) {
+                        // cancelAnimationFrame(raf);
+                      }
+                      // setRange(Number(event.currentTarget.value));
+                    }}
                     onChange={(event) => {
-                      setRange(Number(event.currentTarget.value));
-                      // (
-                      //   document.querySelector("audio") as HTMLMediaElement
-                      // ).volume = Number(event.currentTarget.value);
+                      // setRange(Number(event.currentTarget.value));
+                      (
+                        document.querySelector("audio") as HTMLMediaElement
+                      ).currentTime = Number(event.currentTarget.value);
+                      if (!audio.paused) {
+                        // requestAnimationFrame(whilePlaying);
+                      }
                     }}
                   />
                   <div
@@ -478,6 +563,33 @@ const Feedback = () => {
             </ul>
           </div>
         </div>
+      )}
+      {confirmed === "" && (
+        <footer className="py-[16px] px-[30px] w-screen border-t-[1px] text-xs text-[#545b64] border-t-[#EAEDED] border-t-solid">
+          <div className="flex justify-start align-center h-[20px] ">
+            <ul className="flex justify-center align-center">
+              <li className="after:content-['|'] after:text-[#879596] after:px-[5px] after:h-auto hover:underline hover:after:underline">
+                <Link className="" href={"./feedback"}>
+                  Privacy
+                </Link>
+              </li>
+              <li className="after:content-['|'] after:text-[#879596] after:px-[5px] after:h-auto hover:underline hover:after:underline">
+                <Link className="" href={"./feedback"}>
+                  Site terms
+                </Link>
+              </li>
+              <li className="after:content-['|'] after:text-[#879596] after:px-[5px] after:h-auto hover:underline hover:after:underline">
+                <Link className="" href={"./feedback"}>
+                  Cookie preferences
+                </Link>
+              </li>
+            </ul>
+            <p>
+              © 2023, Amazon Web Services, Inc. or its affiliates. All rights
+              reserved.
+            </p>
+          </div>
+        </footer>
       )}
     </div>
   );

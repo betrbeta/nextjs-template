@@ -150,7 +150,11 @@ input[type="range"] {
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  background: #101010;
+  background: linear-gradient(
+    to right,
+    #101010 0px,
+    /*var(--buffered-width),*/ #d3d3d3 200px /*var(--buffered-width)*/
+  );
   margin-top: -4px;
   transition: all 200ms ease-in;
 }
