@@ -7,7 +7,7 @@ export let options = {
 };
 
 export default function () {
-  let url = "http://localhost:3002";
+  let url = "http://localhost:3000";
   let response = http.get(url);
 
   check(response, {
