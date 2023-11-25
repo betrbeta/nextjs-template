@@ -119,6 +119,7 @@ input[type="range"] {
   background: transparent;
   cursor: pointer;
   overflow: hidden;
+  float: left;
 }
 
 .volume {
@@ -127,21 +128,53 @@ input[type="range"] {
   background: transparent;
   cursor: pointer;
   overflow: hidden;
+  float: left;
+}
+
+.volume::-moz-range-track {
+  height: 4px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #101010 var(--volume-before-width),
+    #d3d3d3 var(--volume-before-width)
+  );
 }
 
 .volume::-webkit-slider-runnable-track {
   height: 4px;
-  background: #101010;
   border: none;
   border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #101010 var(--volume-before-width),
+    #d3d3d3 var(--volume-before-width)
+  );
+}
+
+.range::-moz-range-track {
+  height: 4px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #101010 var(--seek-before-width),
+    #d3d3d3 var(--seek-before-width)
+  );
 }
 
 .range::-webkit-slider-runnable-track {
   height: 4px;
-  background: #d3d3d3;
   border: none;
   border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #101010 var(--seek-before-width),
+    #d3d3d3 var(--seek-before-width)
+  );
 }
+
 .range::-webkit-slider-thumb,
 .volume::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -150,12 +183,37 @@ input[type="range"] {
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  background: linear-gradient(
-    to right,
-    #101010 0px,
-    /*var(--buffered-width),*/ #d3d3d3 200px /*var(--buffered-width)*/
-  );
+  background: #101010;
   margin-top: -4px;
+  transition: all 200ms ease-in;
+}
+
+.range::-moz-range-thumb,
+.volume::-moz-range-thumb {
+  -webkit-appearance: none;
+  opacity: 0;
+  border: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #101010;
+  margin-top: -4px;
+  transition: all 200ms ease-in;
+}
+
+.range:active::-moz-range-thumb,
+.volume:active::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+.range:active::-webkit-slider-thumb,
+.volume:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+.range:hover.range::-moz-range-thumb,
+.volume:hover.volume::-moz-range-thumb {
+  opacity: 1;
   transition: all 200ms ease-in;
 }
 
@@ -165,98 +223,8 @@ input[type="range"] {
   transition: all 200ms ease-in;
 }
 
-/* input[type="range"]::-webkit-slider-runnable-track {
-  /* width: 300px; */
-/* height: 4px;
-  background: #ddd;
-  border: none;
-  border-radius: 4px;
-} */
-*/
-
-/* input[type="range"]::-webkit-slider-runnable-track:hover
-  ~ ::-webkit-slider-thumb {
-  background: red;
-} */
-
-/* input[type="range"]::-webkit-slider-thumb:hover {
-  opacity: 1;
-} */
-
-input[type="range"]:focus {
+input[type="range"]:focus,
+input[type="range"]:-moz-focusring,
+input[type="range"]:focus::-moz-range-track {
   outline: none;
 }
-
-/* input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #ccc;
-} */
-
-/* input[type="range"] { */
-/* fix for FF unable to apply focus style bug  */
-/* border: 1px solid white; */
-
-/*required for proper track sizing in FF*/
-/* width: 300px; */
-/* } */
-
-/* input[type="range"]::-moz-range-track {
-  width: 300px;
-  height: 5px;
-  background: #ddd;
-  border: none;
-  border-radius: 3px;
-}
-
-input[type="range"]::-moz-range-thumb {
-  border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: goldenrod;
-}
-
-/*hide the outline behind the border*/
-/* input[type="range"]:-moz-focusring {
-  outline: 1px solid white;
-  outline-offset: -1px;
-}
-
-input[type="range"]:focus::-moz-range-track {
-  background: #ccc;
-}
-
-input[type="range"]::-ms-track {
-  width: 300px;
-  height: 5px;
-
-  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-/* background: transparent; */
-
-/*leave room for the larger thumb to overflow with a transparent border */
-/* border-color: transparent;
-  border-width: 6px 0; */
-
-/*remove default tick marks*/
-/* color: transparent; */
-/* }
-input[type="range"]::-ms-fill-lower {
-  background: #777;
-  border-radius: 10px;
-}
-input[type="range"]::-ms-fill-upper {
-  background: #ddd;
-  border-radius: 10px;
-}
-input[type="range"]::-ms-thumb {
-  border: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: goldenrod;
-}
-input[type="range"]:focus::-ms-fill-lower {
-  background: #888;
-}
-input[type="range"]:focus::-ms-fill-upper {
-  background: #ccc;
-} */

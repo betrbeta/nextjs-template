@@ -45,10 +45,10 @@ const Feedback = () => {
   const [audio, setAudio] = useState<any>(null);
   const [playState, setPlayState] = useState<string>("play");
   const [volumeOff, setVolumeOff] = useState<Boolean>(false);
-  const [volume, setVolume] = useState<number>(0.5);
+  const [volume, setVolume] = useState<number>(1);
   const [range, setRange] = useState<number>(0);
   const [duration, setDuration] = useState<string>("");
-  const [currentTime, setCurrentTime] = useState<string>("");
+  const [currentTime, setCurrentTime] = useState<string>("0:00");
   const [max, setMax] = useState<number>(0);
 
   function handleSubmit(event: React.FormEvent) {
@@ -84,18 +84,20 @@ const Feedback = () => {
     if (audio.readyState > 0) {
       displayDuration(audio);
       setSliderMax(audio);
-      displayBufferedAmount(audio);
     } else {
       audio.addEventListener("loadedmetadata", () => {
         displayDuration(audio);
         setSliderMax(audio);
-        displayBufferedAmount(audio);
       });
-      audio.addEventListener("progress", () => displayBufferedAmount(audio));
     }
 
     audio.addEventListener("timeupdate", () => {
       setRange(Math.floor(audio.currentTime));
+      setCurrentTime(calculateTime(audio.currentTime));
+      showRangeProgress(audio);
+    });
+    audio.addEventListener("ended", () => {
+      setPlayState("play");
     });
   }, []);
 
@@ -107,45 +109,30 @@ const Feedback = () => {
   };
 
   const setSliderMax = (audio: HTMLMediaElement) => {
+    const volumeSlider = document.querySelector(".volume") as HTMLInputElement;
+    const rangeSlider = document.querySelector(".range") as HTMLInputElement;
     setMax(Math.floor(audio.duration));
+    volumeSlider?.style.setProperty(
+      "--volume-before-width",
+      `${volume * 100}%`
+    );
+    rangeSlider?.style.setProperty("--seek-before-width", "0%");
   };
 
   const displayDuration = (audio: HTMLMediaElement) => {
     setDuration(calculateTime(audio.duration));
   };
 
-  const displayBufferedAmount = (audio: HTMLMediaElement) => {
-    // const captchaAudio = document.querySelector("range") as HTMLDivElement;
-    // const bufferedAmount = Math.floor(
-    //   audio.buffered.end(audio.buffered.length - 1)
-    // );
-    // captchaAudio?.style.setProperty(
-    //   "--buffered-width",
-    //   `${(bufferedAmount / max) * 100}%`
-    // );
+  const showRangeProgress = (audio: HTMLMediaElement) => {
+    const rangeSlider = document.querySelector(".range") as HTMLInputElement;
+
+    if (audio.readyState > 0) {
+      rangeSlider?.style.setProperty(
+        "--seek-before-width",
+        (audio.currentTime / audio.duration) * 100 + "%"
+      );
+    }
   };
-
-  // function onPlaying() {
-  //   const audio = document.querySelector("audio") as HTMLMediaElement;
-  //   // audio.currentTime = range * audio?.duration;
-  //   let count = Math.round(range * 100);
-  //   const interval = setInterval(() => {
-  //     console.log(audio.seeking);
-
-  //     if (count === 100) {
-  //       clearInterval(interval);
-  //     }
-  //     // if (audio.currentTime !== 0) {
-  //     // range !== 0 && audio.currentTime = range * audio?.duration;
-  //     const digit = audio?.currentTime / audio?.duration;
-  //     console.log(digit);
-  //     setRange(Number(digit.toFixed(2)));
-  //     console.log(count);
-  //     count++;
-  //     // }
-  //   }, audio?.duration * 100);
-  // }
-  // console.log(range);
 
   useEffect(() => {
     (async () => {
@@ -267,19 +254,11 @@ const Feedback = () => {
     const audio = document.querySelector("audio") as HTMLMediaElement;
     if (playState === "play") {
       audio.play();
-      // playAnimation.playSegments([14, 27], true);
-      // requestAnimationFrame(whilePlaying);
       setPlayState("pause");
     } else {
       audio.pause();
-      // playAnimation.playSegments([0, 14], true);
-      // cancelAnimationFrame(rAF);
       setPlayState("play");
     }
-
-    // setPlay(!play);
-    // !play ? audio.play() : audio.pause();
-    // mute.volume = mute.volume !== 0 ? 0 : volume;
   };
 
   return (
@@ -460,7 +439,7 @@ const Feedback = () => {
                   <audio src={audio} preload="metadata" />
 
                   <button
-                    className="rounded-full hover:bg-[#D3D3D3] w-[32px] h-[32px] p-[4px]"
+                    className="rounded-full hover:bg-[#e7e7e7] w-[32px] h-[32px] p-[4px]"
                     type="button"
                     onClick={handleClickPlay}
                   >
@@ -480,27 +459,30 @@ const Feedback = () => {
                     aria-label="audio time scrubber"
                     aria-valuetext="elapsed time: 0:00"
                     onInput={(event) => {
+                      event.currentTarget.style.setProperty(
+                        "--seek-before-width",
+                        (Number(event.currentTarget.value) /
+                          Number(event.currentTarget.max)) *
+                          100 +
+                          "%"
+                      );
                       setCurrentTime(
                         calculateTime(Number(event.currentTarget.value))
                       );
                       if (!audio.paused) {
-                        // cancelAnimationFrame(raf);
                       }
-                      // setRange(Number(event.currentTarget.value));
                     }}
                     onChange={(event) => {
-                      // setRange(Number(event.currentTarget.value));
                       (
                         document.querySelector("audio") as HTMLMediaElement
                       ).currentTime = Number(event.currentTarget.value);
                       if (!audio.paused) {
-                        // requestAnimationFrame(whilePlaying);
                       }
                     }}
                   />
                   <div
                     className="flex justify-end rounded-full overflow-hidden w-[32px] h-[32px] transition-all duration-300 
-                ease-out hover:bg-[#D3D3D3] hover:w-[300px]"
+                ease-out hover:bg-[#e7e7e7] hover:w-[300px]"
                   >
                     <input
                       type="range"
@@ -516,6 +498,15 @@ const Feedback = () => {
                         (
                           document.querySelector("audio") as HTMLMediaElement
                         ).volume = Number(event.currentTarget.value);
+                      }}
+                      onInput={(event) => {
+                        event.currentTarget.style.setProperty(
+                          "--volume-before-width",
+                          (Number(event.currentTarget.value) /
+                            Number(event.currentTarget.max)) *
+                            100 +
+                            "%"
+                        );
                       }}
                     />
                     <button
