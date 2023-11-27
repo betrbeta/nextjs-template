@@ -1,10 +1,24 @@
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import app from "./firebaseConfig";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  getDocs,
+} from "firebase/firestore";
 import Subscription from "@/app/interfaces/Subscription";
 import logger from "@/logger";
+import initializeFirebase from "./firebaseConfig";
 
 async function populateFirestoreWithDummyData() {
+  const app = initializeFirebase();
   const db = getFirestore(app);
+  const subscriptionsCollection = collection(db, "subscriptions");
+  const subscriptionsQuery = query(subscriptionsCollection);
+
+  const snapshot = await getDocs(subscriptionsQuery);
+  const subscriptionData = snapshot.docs.map(
+    (doc) => doc.data() as Subscription
+  );
 
   const dummySubscriptions: Subscription[] = [
     {
@@ -21,7 +35,7 @@ async function populateFirestoreWithDummyData() {
     },
     {
       orderId: 2,
-      subscriptionName: "Example Subscription 1",
+      subscriptionName: "Example Subscription 2",
       paymentCycle: "Monthly",
       status: "Active",
       subscriptionStartDate: "2023-09-01",
@@ -29,11 +43,11 @@ async function populateFirestoreWithDummyData() {
       trialSubscriptionEndDate: "2023-09-15",
       nextPaymentDueDate: "2023-10-01",
       nextPaymentAmount: "$19.99",
-      emailAddress: "jkpordje@gmail.com",
+      emailAddress: "2jkpordje@gmail.com",
     },
     {
       orderId: 3,
-      subscriptionName: "Example Subscription 1",
+      subscriptionName: "Example Subscription 3",
       paymentCycle: "Monthly",
       status: "Active",
       subscriptionStartDate: "2023-09-01",
@@ -41,11 +55,11 @@ async function populateFirestoreWithDummyData() {
       trialSubscriptionEndDate: "2023-09-15",
       nextPaymentDueDate: "2023-10-01",
       nextPaymentAmount: "$19.99",
-      emailAddress: "jkpordje@gmail.com",
+      emailAddress: "3jkpordje@gmail.com",
     },
     {
       orderId: 4,
-      subscriptionName: "Example Subscription 1",
+      subscriptionName: "Example Subscription 4",
       paymentCycle: "Monthly",
       status: "Active",
       subscriptionStartDate: "2023-09-01",
@@ -53,11 +67,11 @@ async function populateFirestoreWithDummyData() {
       trialSubscriptionEndDate: "2023-09-15",
       nextPaymentDueDate: "2023-10-01",
       nextPaymentAmount: "$19.99",
-      emailAddress: "jkpordje@gmail.com",
+      emailAddress: "4jkpordje@gmail.com",
     },
     {
       orderId: 5,
-      subscriptionName: "Example Subscription 1",
+      subscriptionName: "Example Subscription 5",
       paymentCycle: "Monthly",
       status: "Active",
       subscriptionStartDate: "2023-09-01",
@@ -65,11 +79,11 @@ async function populateFirestoreWithDummyData() {
       trialSubscriptionEndDate: "2023-09-15",
       nextPaymentDueDate: "2023-10-01",
       nextPaymentAmount: "$19.99",
-      emailAddress: "jkpordje@gmail.com",
+      emailAddress: "5jkpordje@gmail.com",
     },
     {
       orderId: 6,
-      subscriptionName: "Example Subscription 1",
+      subscriptionName: "Example Subscription 6",
       paymentCycle: "Monthly",
       status: "Active",
       subscriptionStartDate: "2023-09-01",
@@ -77,11 +91,11 @@ async function populateFirestoreWithDummyData() {
       trialSubscriptionEndDate: "2023-09-15",
       nextPaymentDueDate: "2023-10-01",
       nextPaymentAmount: "$19.99",
-      emailAddress: "jkpordje@gmail.com",
+      emailAddress: "6jkpordje@gmail.com",
     },
     {
       orderId: 7,
-      subscriptionName: "Example Subscription 1",
+      subscriptionName: "Example Subscription 7",
       paymentCycle: "Monthly",
       status: "Active",
       subscriptionStartDate: "2023-09-01",
@@ -89,15 +103,23 @@ async function populateFirestoreWithDummyData() {
       trialSubscriptionEndDate: "2023-09-15",
       nextPaymentDueDate: "2023-10-01",
       nextPaymentAmount: "$19.99",
-      emailAddress: "jkpordje@gmail.com",
+      emailAddress: "7jkpordje@gmail.com",
     },
   ];
 
-  for (const subscription of dummySubscriptions) {
+  const filteredSubscription =
+    subscriptionData.length !== 0
+      ? dummySubscriptions.filter((a) =>
+          subscriptionData.find(
+            (b) => Object.values(b)[0].orderId === a.orderId
+          )
+        )
+      : dummySubscriptions;
+  for (const subscription of filteredSubscription) {
     await addDoc(collection(db, "subscriptions"), subscription);
   }
 
-  logger.info("Dummy data added to firebase")
+  logger.info("Dummy data added to firebase");
 }
 
-export default populateFirestoreWithDummyData();
+export default populateFirestoreWithDummyData;
