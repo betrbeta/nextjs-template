@@ -128,6 +128,7 @@ export const SendEmail = () => {
         placeholder="Write text here ..."
       />
       <input
+        id="email"
         className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-0"
         type="email"
         name="email"
@@ -136,6 +137,7 @@ export const SendEmail = () => {
         placeholder="Write E-mail here ..."
       />
       <button
+        id="button"
         type="submit"
         className="px-6 py-3 text-white whitespace-nowrap transition-all hover:bg-white hover:text-[#330033] rounded-e-[22px] border-[3px] border-black border-solid"
         onSubmit={handleSendEmail}

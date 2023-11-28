@@ -25,7 +25,7 @@ const MySubscription = () => {
   }, []);
 
   return (
-    <div className="subscription-page">
+    <div id="subscription-page" className="subscription-page">
       <h1>My Subscriptions</h1>
       <SubscriptionsTable subscriptions={subscriptions} />
     </div>
