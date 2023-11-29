@@ -136,16 +136,13 @@ const Feedback = () => {
 
   useEffect(() => {
     (async () => {
-      //   let code;
       (document.getElementById("captcha") as HTMLDivElement).innerHTML = "";
       const charsArray = "0123456789abcdefghijklmnopqrstuvwxyz"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ@!#$%^&*
       const lengthOtp = 6;
       let captcha = [];
       for (let i = 0; i < lengthOtp; i++) {
         const index = Math.floor(Math.random() * charsArray.length + 1);
-        // if (captcha.indexOf(charsArray[index]) === -1)
         captcha.push(charsArray[index]);
-        // else i--;
       }
       setSecret(captcha.join(""));
       const canvas = document.createElement("canvas");
@@ -231,13 +228,12 @@ const Feedback = () => {
         Math.random() > 0.5
           ? Math.floor(Math.random() * 10) * -1
           : Math.floor(Math.random() * 10);
-      //   context.moveTo(x, 0);
+
       context.fillText(captcha.join(""), x, 48);
-      //   context.strokeText(captcha.join(""));
-      //   code = captcha.join("");
+
       (document.getElementById("captcha") as HTMLCanvasElement).appendChild(
         canvas
-      ); // adds the canvas to the body element
+      );
 
       const b64 = await tts(captcha.join(","));
       setAudio(b64);
