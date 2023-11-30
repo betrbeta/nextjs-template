@@ -118,7 +118,7 @@ export const SendEmail = () => {
   };
   // console.log(state);
   return (
-    <div className="flex justify-center items-center transition-all">
+    <form className="flex justify-center items-center transition-all">
       <input
         className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-s-[22px]"
         type="text"
@@ -137,13 +137,13 @@ export const SendEmail = () => {
         placeholder="Write E-mail here ..."
       />
       <button
-        id="button"
+        id="email_button"
         type="submit"
         className="px-6 py-3 text-white whitespace-nowrap transition-all hover:bg-white hover:text-[#330033] rounded-e-[22px] border-[3px] border-black border-solid"
         onSubmit={handleSendEmail}
       >
         Send mail
       </button>
-    </div>
+    </form>
   );
 };
