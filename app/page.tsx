@@ -28,6 +28,7 @@ const Home = () => {
         </h1>
         <div>
           <input
+            id="inputViewer"
             className="h1"
             type="text"
             value={url}

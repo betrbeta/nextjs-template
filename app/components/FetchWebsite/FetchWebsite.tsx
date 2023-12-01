@@ -44,6 +44,7 @@ export const FetchWebsite = ({ url }: { url: string }) => {
         </div>
       ) : (
         <iframe
+          id="iframe"
           src={href}
           style={{
             width: "100%",
