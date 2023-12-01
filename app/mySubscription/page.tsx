@@ -18,7 +18,7 @@ const MySubscription = () => {
       const subscriptionData = snapshot.docs.map(
         (doc) => doc.data() as Subscription
       );
-
+      console.log(subscriptionData);
       setSubscriptions(subscriptionData);
     };
     fetchData();
