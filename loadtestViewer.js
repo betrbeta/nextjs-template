@@ -1,6 +1,7 @@
 import { browser } from "k6/experimental/browser";
 import { check } from "k6";
 
+
 export const options = {
   scenarios: {
     browser: {
