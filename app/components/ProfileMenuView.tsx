@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import CloseSvg from "./CloseSvg";
@@ -8,7 +8,11 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Link from "next/link";
 
+import { CiSettings } from "react-icons/ci";
+import { FaPlus } from "react-icons/fa6";
+
 export default function ProfileMenuView() {
+
   const [open, setOpen] = useState(true);
   const [percentage, setPercentage] = useState(10); // put value here
   const [used, setUsed] = useState("0.67"); // put value here
@@ -47,31 +51,32 @@ export default function ProfileMenuView() {
           </div>
           <h3 className="mx-4 mt-4 mb-2">Betr Beta Dev</h3>
           <div className="flex mx-4 mb-2">
-            <img
+            {/* <img
               src="https://picsum.photos/200/300"
               alt="profile_pic"
               className="object-cover h-32 w-28 rounded-xl"
-            />
+            /> */}
             <div className="block mx-5">
-              <div className="mb-5 text-lg font-bold">
+              {/* <div className="mb-5 text-lg font-bold">
                 <p>Name</p>
-              </div>
-              <div className="mb-5 text-sm font-medium">
+              </div> */}
+              <div className="mb-3 text-sm font-medium">
                 <p>example@email.com</p>
               </div>
-              <div className="text-sm font-medium">
+              {/* <div className="text-sm font-medium">
                 <p>User ID: 0000000</p>
-              </div>
+              </div> */}
             </div>
           </div>
-          <Link
-            href={"./dashboard"}
-            className="block px-4 py-2 mb-2 text-lg font-bold bg-white bg-opacity-5 hover:bg-opacity-10"
-          >
-            <p>Dashboard</p>
-          </Link>
+          
 
-          <div className="m-3 mt-10">
+          <hr className="m-3 bg-white">
+          </hr>
+
+
+          
+
+          {  <div className="m-3 mt-10">
             <img
               src="https://source.unsplash.com/user/c_v_r/1900x800"
               alt=""
@@ -102,9 +107,49 @@ export default function ProfileMenuView() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> 
+          
+          } 
+
+          <hr className="m-3 bg-white">
+          </hr>
+
+          <Link
+            href={"./dashboard"}
+            className="block px-4 py-2 mb-2 text-lg font-bold bg-white bg-opacity-5 hover:bg-opacity-10"
+          >
+            <p>Dashboard</p>
+          </Link>
+
+          <Link
+            href={"http://betrbeta.com"}
+            className="block px-4 py-2 mb-2 text-lg font-bold bg-white bg-opacity-5 hover:bg-opacity-10"
+          >
+            <p>Betr Beta Homepage</p>
+          </Link>
+
+          <Link
+            href={"./dashboard"}
+            className="block px-4 py-2 mb-2 text-lg font-bold bg-white bg-opacity-5 hover:bg-opacity-10"
+          >
+            <p>Log Out</p>
+          </Link>
+
+          <hr className="m-3 bg-white">
+          </hr>
+
+          <Link
+            href={"./dashboard"}
+            className="block px-4 py-2 m-5 text-lg font-bold bg-white rounded-lg text-black"
+          >
+            <p>Upgrade to Pro</p>
+          </Link>
+          
         </div>
       )}
+
+          
+
       {/* <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas
         blanditiis, repudiandae officiis molestiae saepe, cumque expedita et
