@@ -18,9 +18,8 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Header />
-      <div>
+    <div className="mt-2 pt-2">
+      <div >
         <h1 className="title">
           <Link href={"/"} onClick={() => setUrl("")}>
             Webpage Viewer
@@ -41,8 +40,9 @@ const Home = () => {
           )}
         </div>
       </div>
+
       <CookieBanner />
-      <Feedback />
+      {/* <Feedback /> */}
     </div>
   );
 };

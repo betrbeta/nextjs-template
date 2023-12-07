@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import LikeIconSvg from "../SVGs/LikeIconSvg";
 import DislikeIconSvg from "../SVGs/DislikeIconSvg";
