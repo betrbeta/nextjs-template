@@ -133,6 +133,7 @@ export default function ProfileMenuView() {
                     strokeWidth={8}
                     styles={buildStyles({
                       pathColor: "rgb(43,102,220)",
+                      strokeLinecap: 'butt'
                     })}
                   >
                     <div style={{ width: "84%" }}>
@@ -141,6 +142,7 @@ export default function ProfileMenuView() {
                         styles={buildStyles({
                           pathColor: "rgb(150,183,250)",
                           trailColor: "transparent",
+                          strokeLinecap: 'butt'
                         })}
                       />
                     </div>
