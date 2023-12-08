@@ -134,7 +134,7 @@ const Home = () => {
       .catch((err) => console.error(err));
   }
 
-  async function sendEmail(id) {
+  async function sendEmail(id: any) {
     const options = {
       method: "POST",
       headers: {
