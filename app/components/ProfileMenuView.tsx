@@ -37,7 +37,7 @@ export default function ProfileMenuView() {
 
       {open && (
         <div
-          className="transition-all absolute w-[350px] h-auto overflow-visible top-[116px] right-[16px] bg-white border-solid border-white border rounded-2xl shadow-2xl text-black"
+          className="transition-all absolute w-[360px] h-auto overflow-visible top-[116px] right-[16px] bg-white border-solid border-white border rounded-2xl shadow-2xl text-black"
           // className={`${
           //   open
           //     ? "lg:left-[68%] max-sm:left-[0%] sm:left-[47%] xl:left-[79.5%] md:left-[61%]"
@@ -126,38 +126,58 @@ export default function ProfileMenuView() {
               <hr className="m-3 bg-white"></hr>
 
               <div className="flex mt-10 w-max">
-                <div className="w-20 h-20 mx-10">
+                <div className="w-24 h-24 mx-10">
                   <CircularProgressbarWithChildren
                     value={percentage}
-                    text={`${percentage}%`}
                     strokeWidth={8}
                     styles={buildStyles({
                       pathColor: "rgb(43,102,220)",
-                      strokeLinecap: 'butt'
+                      strokeLinecap: 'butt',
                     })}
                   >
                     <div style={{ width: "84%" }}>
-                      <CircularProgressbar
+                      <CircularProgressbarWithChildren
                         value={percentage}
                         styles={buildStyles({
                           pathColor: "rgb(150,183,250)",
                           trailColor: "transparent",
                           strokeLinecap: 'butt'
                         })}
-                      />
+                      >
+                        <div style={{width: "70%"}}>
+                          <CircularProgressbarWithChildren
+                            value={0}
+                            background
+                            styles={buildStyles({
+                              backgroundColor: '#96B7FA',
+                              trailColor: 'transparent',
+                              textSize: '20px',
+                              textColor: '#000000'
+                            })}
+                          >
+
+                            <p className="text-[10px] -mt-1">Used</p>
+                            <p className="text-[16px] ml-1">{percentage}%</p>
+                          </CircularProgressbarWithChildren>
+                        </div>
+                        
+
+                      </CircularProgressbarWithChildren>
+
                     </div>
+
                   </CircularProgressbarWithChildren>
                 </div>
 
                 <div className="mb-12 break-normal ">
-                  <p className="my-1 ml-16">Mail</p>
-                  <p className="mx-auto my-1 ml-16 text-blue-400 flex">
+                  <p className="my-1 ml-14">Mail</p>
+                  <p className="mx-auto my-1 ml-14 text-blue-400 flex">
                     <div className="w-3 h-3 mt-1">
                       <CircularProgressbar value={100} strokeWidth={25} />
                     </div>
                     {percentage}%
                   </p>
-                  <p className="text-blue-400 w-max">
+                  <p className="text-blue-400 w-max text-[15px]">
                     {used} GB of {totalSpace} GB Used
                   </p>
                 </div>
