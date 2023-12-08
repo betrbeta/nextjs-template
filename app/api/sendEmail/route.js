@@ -4,8 +4,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp-relay.brevo.com",
   port: 587,
   auth: {
-    user: process.env.MAILER_USER,
-    pass: process.env.MAILER_PASSWORD,
+    user: process.env.NEXT_PUBLIC_MAILER_USER,
+    pass: process.env.NEXT_PUBLIC_MAILER_PASSWORD,
   },
 });
 
@@ -18,15 +18,15 @@ const transporter = nodemailer.createTransport({
 // const htmlOutput = welcomeEmail('Jane', 'Smith')
 
 export async function POST(request) {
-  const {email} = await request.json();
+  const { email } = await request.json();
 
   if (email) {
     try {
       await sendTestTrackableEmail("", email);
-      return Response.json({message: "Success!"});
+      return Response.json({ message: "Success!" });
     } catch (error) {
       console.log("Error", error);
-      return Response.json({error: "Invalid log level"});
+      return Response.json({ error: "Invalid log level" });
     }
   }
 }
@@ -35,7 +35,7 @@ async function sendTestTrackableEmail(testText, email) {
   console.log(email);
 
   await transporter.sendMail({
-    from: process.env.MAILER_USER,
+    from: process.env.NEXT_PUBLIC_MAILER_USER,
     to: email,
     subject: "Test mail",
     html: `<div

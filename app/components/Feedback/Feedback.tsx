@@ -244,22 +244,44 @@ export const Feedback = () => {
             changeColor === true ? "bg-[#e8fcd7]" : "bg-[#e6fafb]"
           }`}
         >
-          <feedback-component onClick={handleFeedback}>
-            <span
-              slot="cta"
-              className="text-[#003558] m-[3px] whitespace-nowrap"
-            >
-              Was this page helpful?
-            </span>
-            <span slot="confirmation" className="text-[#4e7a3e]">
-              Thank you for your feedback!
-            </span>
-            <span slot="option-icon:0">
-              <LikeIconSvg />
-            </span>
-            <span slot="option-icon:1" onClick={handleBadFeedback}>
-              <DislikeIconSvg />
-            </span>
+          <feedback-component
+            onClick={handleFeedback}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            {changeColor === false ? (
+              <span
+                slot="cta"
+                className="inline-block text-[#003558] m-[3px] whitespace-nowrap"
+              >
+                Was this page helpful?
+              </span>
+            ) : (
+              <span slot="confirmation" className="inline-block text-[#4e7a3e]">
+                Thank you for your feedback!
+              </span>
+            )}
+            {changeColor === false && (
+              <>
+                <span
+                  className="inline-block cursor-pointer"
+                  slot="option-icon:0"
+                >
+                  <LikeIconSvg />
+                </span>
+                <span
+                  className="inline-block cursor-pointer"
+                  slot="option-icon:1"
+                  onClick={handleBadFeedback}
+                >
+                  <DislikeIconSvg />
+                </span>
+              </>
+            )}
           </feedback-component>
         </div>
       )}
