@@ -5,8 +5,8 @@ import "./styles/style.css";
 import CookieBanner from "./components/CookiesBanner/CookiesBanner";
 import Link from "next/link";
 import { FetchWebsite } from "./components/FetchWebsite/FetchWebsite";
-import { Feedback } from "./components/Feedback/Feedback";
-import { Header } from "./components/Header/Header";
+// import { Feedback } from "./components/Feedback/Feedback";
+// import { Header } from "./components/Header/Header";
 import { useDebounce } from "./hooks/useDebounce";
 
 const Home = () => {

@@ -47,9 +47,7 @@ export const Header = () => {
               About
             </li>
           </Link>
-          {/* <Link href="/partners">
-            <li className="my-4 py-4 border-b font-semibold border-slate-400 hover:text-white hover:text-2xl hover:bg-slate-400 hover:rounded">Partners</li>
-          </Link> */}
+          
           <Link href="/contact">
             <li className="my-4 py-4 border-b font-semibold border-gray-500 text-white hover:text-2xl hover:bg-gray-400 hover:rounded">
               Contact
