@@ -3,7 +3,12 @@ import type { Metadata } from 'next'
 import { Inter, Roboto } from "next/font/google";
 import { Header } from "./components/Header/Header";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: 'Next Template',
@@ -19,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={`${inter.className}`}>
+<body className={`${inter.className}, ${roboto.className}`}>
         <Header />
 
         {children}
