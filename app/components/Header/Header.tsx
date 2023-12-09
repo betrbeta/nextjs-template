@@ -190,7 +190,27 @@ export const Header = () => {
                 />
               </Link>
 
-              <Link
+              <Link href="https://betrbeta.com/" className="flex flex-col items-start my-[12px]">
+  <h4 className="w-full hover:font-semibold">You're in Mail Lite Plan</h4>
+  <p className="text-xs text-gray-400">Plan expires on 2024</p>
+  
+  {/* Dynamic circular progress bar with Tailwind CSS classes */}
+  <div className="relative w-20 h-20 flex">
+    <div className="absolute inset-0 flex items-center justify-center ">
+      <div
+        className="rounded-full  border-t-4 border-blue-500 border-solid h-10 w-10 transform rotate-45"
+        style={{ transform: `rotate(${360 * (usagePercentage / 100)}deg)` }}
+      ></div>
+    </div>
+    <div className="absolute inset-0 flex items-center justify-center text-white ">
+      <span className="text-xs font-semibold">{usagePercentage}%</span>
+    </div>
+  </div>
+    <span className="text-xs font-semibold">Used {usagePercentage}%</span>
+    <span className="text-xs font-semibold mb-0">0.56 GB of 5GB used</span>
+</Link>
+
+              {/* <Link
                 href="https://betrbeta.com/"
                 className="flex flex-col items-start my-[12px]"
               >
@@ -212,7 +232,7 @@ export const Header = () => {
       ></div>
     </div>
   </div>
-              </Link>
+              </Link> */}
 
               <Link href="#" className="flex items-center my-[12px]">
                 <p className="w-[100%] hover:font-semibold">Logout</p>
