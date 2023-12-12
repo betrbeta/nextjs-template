@@ -1,10 +1,12 @@
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
 
+import { logger } from "../../utils/logger"
+
 const CookieBanner = () => {
   const handleAccept = () => {
     Cookies.set("Cookies", "accepted", { expires: 365 });
-    console.log("cookies accepted");
+    logger.info("cookies accepted");
   };
   return (
     <CookieConsent

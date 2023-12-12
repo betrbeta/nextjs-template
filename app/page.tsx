@@ -6,6 +6,8 @@ import "./styles/style.css";
 
 import mixpanel from "../config/mixpanel";
 
+import { logger } from "../utils/logger"
+
 import CookieBanner from "./components/CookiesBanner";
 import Link from "next/link";
 
@@ -32,6 +34,7 @@ const FetchWebsite = ({ url }: { url: string }) => {
         trackWebsiteFetch(url);
       } catch (err) {
         setHasError(true);
+        logger.error(err);
       }
     };
 
