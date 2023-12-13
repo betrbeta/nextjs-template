@@ -1,7 +1,21 @@
 import { useState } from "react";
+import { generateEmailSubject } from "../EmailSubjectHelper/emailSubjectHelper";
 
 export const SendEmail = () => {
   const [email, setEmail] = useState<string>("");
+  const [subject, setSubject] = useState<string>();
+
+  const contentPrompt =
+    "Discussing the latest features of our product and how they benefit our users.";
+
+  async function handleGenerateSubject() {
+    try {
+      const emailSubject = await generateEmailSubject(contentPrompt);
+      console.log("Generated Email Subject:", emailSubject);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
   async function createTemplate() {
     const options = {
@@ -13,7 +27,7 @@ export const SendEmail = () => {
       },
       body: JSON.stringify({
         sender: { email: "rudenko.sergey.v@gmail.com" },
-        templateName: "emailConfirmation",
+        templateName: "Subject",
         htmlContent: `<div
       style="
         font-family: Arial, sans-serif;
@@ -63,7 +77,7 @@ export const SendEmail = () => {
         about your account's safety, please reply to this email to get in touch with us.
       </p>
     </div>`,
-        subject: "Email confirmation",
+        subject: subject,
         isActive: true,
       }),
     };
@@ -99,7 +113,7 @@ export const SendEmail = () => {
   };
 
   return (
-    <div className="flex justify-center items-center transition-all">
+    <div className="flex items-center justify-center transition-all">
       <input
         className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-s-[22px] border-r-0 border-l-0"
         type="email"
@@ -108,6 +122,15 @@ export const SendEmail = () => {
         onChange={(event) => setEmail(event.currentTarget.value)}
         placeholder="Write E-mail here ..."
       />
+      <input
+        className="px-6 py-3 w-[200px] text-[#330033] border-[3px] border-black border-solid border-r-0 border-l-[3px] cursor-pointer"
+        type="text"
+        name="subject"
+        value={subject}
+        onClick={handleGenerateSubject}
+        placeholder="Lets create subject ..."
+      />
+
       <button
         type="submit"
         className="px-6 py-3 text-white whitespace-nowrap transition-all hover:bg-white hover:text-[#330033] rounded-e-[22px] border-[3px] border-black border-solid"
