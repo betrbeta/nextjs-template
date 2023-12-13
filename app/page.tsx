@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FetchWebsite } from "./components/FetchWebsite/FetchWebsite";
 import { Feedback } from "./components/Feedback/Feedback";
 import { Header } from "./components/Header/Header";
+import  SearchBar  from "./components/GmailSearchBar/SearchBar"
 import { useDebounce } from "./hooks/useDebounce";
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
   return (
     <div>
       <Header />
+      <SearchBar></SearchBar>
       <div>
         <h1 className="title">
           <Link href={"/"} onClick={() => setUrl("")}>
