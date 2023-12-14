@@ -8,6 +8,7 @@ import {FetchWebsite} from "./components/FetchWebsite/FetchWebsite";
 import {Feedback} from "./components/Feedback/Feedback";
 import {Header} from "./components/Header/Header";
 import {useDebounce} from "./hooks/useDebounce";
+import logger from "@/lib/logger/logger";
 
 const Home = () => {
   const [url, setUrl] = useState<string>("");
@@ -15,6 +16,7 @@ const Home = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
+    logger.info({ event: event.target.value }, `Handle change`);
   };
 
   return (
