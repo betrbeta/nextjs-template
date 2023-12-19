@@ -19,7 +19,6 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
       <div>
         <h1 className="title">
           <Link href={"/"} onClick={() => setUrl("")}>
@@ -42,7 +41,7 @@ const Home = () => {
         </div>
       </div>
       <CookieBanner />
-      <Feedback />
+      {/* <Feedback /> */}
     </div>
   );
 };
