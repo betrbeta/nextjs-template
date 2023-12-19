@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import SubscriptionsTable from "../components/SubscriptionTable";
+import SubscriptionsTable from "../components/SubscriptionTable/SubscriptionTable";
 import { getFirestore, collection, query, getDocs } from "firebase/firestore";
 import app from "@/lib/filebase/firebaseConfig";
 import Subscription from "../interfaces/Subscription";

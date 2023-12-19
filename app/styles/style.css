@@ -27,6 +27,7 @@ input.h1 {
 input:focus {
   outline: none;
 }
+
 .error {
   color: red;
   text-align: center;

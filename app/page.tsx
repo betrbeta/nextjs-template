@@ -11,7 +11,7 @@ import { useDebounce } from "./hooks/useDebounce";
 
 const Home = () => {
   const [url, setUrl] = useState<string>("");
-  const debouncedValue = useDebounce<string>(url, 2000);
+  const debouncedValue = useDebounce<string>(url, url === "" ? 0 : 2000);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
