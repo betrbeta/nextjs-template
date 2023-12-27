@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "start:staging": "next start -e staging",
+    "start:production": "next start -e production",
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@types/node": "20.5.3",
@@ -22,7 +25,7 @@
     "next": "^14.0.2",
     "next-pwa": "^5.6.0",
     "nodemailer": "^6.9.7",
-    "pino": "^8.17.0",
+    "pino": "^8.17.1",
     "react": "18.2.0",
     "react-cookie-consent": "^8.0.1",
     "react-dom": "18.2.0",
@@ -34,7 +37,6 @@
     "@types/mixpanel-browser": "^2.47.2",
     "autoprefixer": "^10.4.16",
     "cypress": "^13.6.1",
-    "pino-pretty": "^10.2.3",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5"
   }
