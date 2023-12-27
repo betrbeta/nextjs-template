@@ -23,6 +23,8 @@ describe('Home Page', () => {
     const invalidUrl = 'invalid-url';
 
     cy.get('input').first().type(invalidUrl).should('have.value', invalidUrl);
+    // cy.get('.error').should('exist');
+    // cy.get('.error', { timeout: 10000 }).should('exist');
   });
 
   it('loads the website on valid URL input', () => {
