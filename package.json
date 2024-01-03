@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:local": "set NODE_ENV=local&& next dev",
     "build": "next build",
     "start": "next start",
-    "start:staging": "next start -e staging",
-    "start:production": "next start -e production",
+    "start:staging": "set NODE_ENV=staging&& next start",
+    "start:production": "set NODE_ENV=production&& next start",
     "lint": "next lint",
     "cypress:open": "cypress open"
   },
