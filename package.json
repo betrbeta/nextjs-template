@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:local": "set NODE_ENV=local&& next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "start:staging": "set NODE_ENV=staging&& next start",
+    "start:production": "set NODE_ENV=production&& next start",
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@types/node": "20.5.3",
@@ -22,7 +26,7 @@
     "next": "^14.0.2",
     "next-pwa": "^5.6.0",
     "nodemailer": "^6.9.7",
-    "pino": "^8.16.1",
+    "pino": "^8.17.1",
     "react": "18.2.0",
     "react-cookie-consent": "^8.0.1",
     "react-dom": "18.2.0",
@@ -33,7 +37,7 @@
     "@types/lodash.debounce": "^4.0.9",
     "@types/mixpanel-browser": "^2.47.2",
     "autoprefixer": "^10.4.16",
-    "pino-pretty": "^10.2.3",
+    "cypress": "^13.6.1",
     "postcss": "^8.4.31",
     "prettier": "3.1.1",
     "tailwindcss": "^3.3.5"

@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, {useState, ChangeEvent} from "react";
 import "./styles/style.css";
 import CookieBanner from "./components/CookiesBanner/CookiesBanner";
 import Link from "next/link";
-import { FetchWebsite } from "./components/FetchWebsite/FetchWebsite";
-import { Feedback } from "./components/Feedback/Feedback";
-import { Header } from "./components/Header/Header";
-import { useDebounce } from "./hooks/useDebounce";
+import {FetchWebsite} from "./components/FetchWebsite/FetchWebsite";
+import {Feedback} from "./components/Feedback/Feedback";
+import {Header} from "./components/Header/Header";
+import {useDebounce} from "./hooks/useDebounce";
 
 const Home = () => {
   const [url, setUrl] = useState<string>("");
@@ -18,32 +18,39 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Header />
       <div>
-        <h1 className="title">
-          <Link href={"/"} onClick={() => setUrl("")}>
-            Webpage Viewer
-          </Link>
-        </h1>
+        <Header/>
         <div>
-          <input
-            className="h1"
-            type="text"
-            value={url}
-            onChange={handleChange}
-            placeholder="Enter URL"
-          />
+          <h1 className="title">
+            <Link
+                data-cy='link'
+                href={"/"}
+                onClick={() => setUrl("")}>
+              Webpage Viewer
+            </Link>
+          </h1>
+          <div>
+            <input
+                data-cy="url-input"
+                className="h1"
+                type="text"
+                value={url}
+                onChange={handleChange}
+                placeholder="Enter URL"
+            />
+          </div>
+          <div>
+            {url && (
+                <FetchWebsite
+                    data-cy="fetch-website"
+                    url={debouncedValue !== "" ? debouncedValue : url}
+                />
+            )}
+          </div>
         </div>
-        <div>
-          {url && (
-            <FetchWebsite url={debouncedValue !== "" ? debouncedValue : url} />
-          )}
-        </div>
+        <CookieBanner/>
+        <Feedback/>
       </div>
-      <CookieBanner />
-      <Feedback />
-    </div>
   );
 };
 
