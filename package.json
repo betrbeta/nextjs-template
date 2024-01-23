@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "dev:local": "set NODE_ENV=local&& next dev",
+    "dev:staging": "set NODE_ENV=staging&& next dev",
+    "dev:production": "set NODE_ENV=production&& next dev",
     "build": "next build",
     "start": "next start",
     "start:staging": "set NODE_ENV=staging&& next start",
