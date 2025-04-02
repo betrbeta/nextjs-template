@@ -98,6 +98,7 @@ async function populateFirestoreWithDummyData() {
   }
 
   logger.info("Dummy data added to firebase")
+  console.log("Dummy data added to firebase")
 }
 
 export default populateFirestoreWithDummyData();

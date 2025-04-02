@@ -9,6 +9,8 @@ import {
   Textarea,
   Radio,
   FileInput,
+  ModalBody,
+  ModalHeader,
 } from "flowbite-react";
 
 declare global {
@@ -109,11 +111,12 @@ export const Feedback = () => {
             setBlob("");
           }}
         >
-          <Modal.Header />
-          <Modal.Body>
-            <div className="flex max-w-md flex-col gap-4">
+      
+          <ModalHeader> </ModalHeader>
+          <ModalBody >
+            <div className="flex flex-col max-w-md gap-4">
               <fieldset
-                className="flex max-w-md flex-col gap-4"
+                className="flex flex-col max-w-md gap-4"
                 onChange={(event) => {
                   const target = event.target as HTMLInputElement;
                   setMessage((prev) => ({
@@ -131,7 +134,7 @@ export const Feedback = () => {
                     name="radio"
                     value="missing"
                     // defaultChecked
-                  />
+                    />
                   <Label htmlFor="missing">It has missing information</Label>
                 </div>
                 <div className="flex items-center gap-2">
@@ -150,11 +153,11 @@ export const Feedback = () => {
                 </div>
               </fieldset>
               <div className="max-w-md">
-                <div className="mb-2 block">
-                  <Label htmlFor="comment" value="Your message" />
+                <div className="block mb-2">
+                  <Label htmlFor="comment">Your message</Label>
                 </div>
                 <Textarea
-                  className="p-[10px] !outline-none"
+                  className="p-[10px] outline-hidden!"
                   id="comment"
                   placeholder="Leave a comment..."
                   required
@@ -168,24 +171,24 @@ export const Feedback = () => {
                 />
               </div>
               <div id="fileUpload" className="max-w-md">
-                <div className="mb-2 block">
-                  <Label htmlFor="file" value="Upload file" />
+                <div className="block mb-2">
+                  <Label htmlFor="file">Upload file</Label>
                 </div>
                 <FileInput
                   className="file:mr-5 file:py-1 file:px-3 file:border-[1px] file:text-xs file:font-medium file:bg-stone-50 file:text-stone-700 hover:file:cursor-pointer hover:file:bg-blue-50 hover:file:text-blue-700"
                   id="file"
-                  helperText="File providing is useful to understand problem within"
+                  placeholder="File providing is useful to understand problem within"
                   onChange={(event) =>
                     setMessage((prev) => ({
                       ...prev,
                       file: event.target.files ? event.target.files[0] : null,
                     }))
                   }
-                />
+                  />
               </div>
               <div id="screenshootUpload" className="max-w-md">
-                <div className="mb-2 block">
-                  <Label htmlFor="screenshoot" value="Upload screenshoot" />
+                <div className="block mb-2">
+                  <Label htmlFor="screenshoot">Upload screenshoot</Label>
                 </div>
                 <div>
                   <Button
@@ -201,7 +204,7 @@ export const Feedback = () => {
                         setBlob("");
                       }
                     }}
-                  >
+                    >
                     {blob === "" ? "Upload screenshoot" : "Reset screenshot"}
                   </Button>
                   <p>Screenshoot is useful to understand problem</p>
@@ -210,9 +213,9 @@ export const Feedback = () => {
                   )}
                 </div>
                 <hr className="h-px my-8 bg-[#330033] opacity-50 border-0"></hr>
-                <div className="mb-4 block w-full">
-                  <div className="mb-2 block">
-                    <Label htmlFor="email" value="Your email" />
+                <div className="block w-full mb-4">
+                  <div className="block mb-2">
+                    <Label htmlFor="email" >Your email</Label>
                   </div>
                   <TextInput
                     id="email"
@@ -231,12 +234,13 @@ export const Feedback = () => {
                   className="w-full"
                   type="submit"
                   onClick={handleSubmit}
-                >
+                  >
                   Send feedback to BetrBeta
                 </Button>
               </div>
             </div>
-          </Modal.Body>
+          </ModalBody>
+     
         </Modal>
       ) : (
         <div

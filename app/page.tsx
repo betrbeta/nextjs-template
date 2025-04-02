@@ -28,7 +28,7 @@ const Home = () => {
         </h1>
         <div>
           <input
-            className="h1"
+            className=" h1"
             type="text"
             value={url}
             onChange={handleChange}
@@ -42,7 +42,9 @@ const Home = () => {
         </div>
       </div>
       <CookieBanner />
+    
       <Feedback />
+
     </div>
   );
 };

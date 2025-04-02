@@ -35,7 +35,10 @@ const SubscriptionsTable: FC<Props> = (props) => {
       <table>
         <thead>
           <tr>
-            <th>OrderId</th>
+            <th>OrderId
+
+              
+            </th>
             <th>Subscription Name</th>
             <th>Payment Cycle</th>
             <th>Status</th>
@@ -51,6 +54,7 @@ const SubscriptionsTable: FC<Props> = (props) => {
         <tbody>
           {subscriptions.map((subscription) => (
             <tr key={subscription.orderId}>
+              
               <td>{subscription.orderId}</td>
               <td>{subscription.subscriptionName}</td>
               <td>{subscription.paymentCycle}</td>
