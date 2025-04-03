@@ -12,7 +12,7 @@ export const SendEmail = () => {
         "api-key": `${process.env.NEXT_PUBLIC_MAILER_APIKEY}`,
       },
       body: JSON.stringify({
-        sender: { email: "rudenko.sergey.v@gmail.com" },
+        sender: { email: "mh.programer@gmail.com" },
         templateName: "emailConfirmation",
         htmlContent: `<div
       style="
@@ -99,9 +99,9 @@ export const SendEmail = () => {
   };
 
   return (
-    <div className="flex justify-center items-center transition-all">
+    <div className="flex items-center justify-center transition-all">
       <input
-        className="px-6 py-3 w-[300px] text-[#330033] border-[3px] border-black border-solid rounded-s-[22px] border-r-0 border-l-0"
+        className="px-6 py-3 w-[300px] bg-white text-[#330033] border-[3px] border-black border-solid rounded-s-[22px] border-r-0 border-l-0"
         type="email"
         name="email"
         value={email}
