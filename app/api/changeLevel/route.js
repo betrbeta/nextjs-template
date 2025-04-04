@@ -1,4 +1,4 @@
-const logger = require("../../../logger");
+import logger  from "../../../logger";
 
 export async function POST(request) {
   const {level} = await request.json();

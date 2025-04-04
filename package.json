@@ -35,6 +35,8 @@
     "@types/js-cookie": "^3.0.6",
     "@types/lodash.debounce": "^4.0.9",
     "@types/mixpanel-browser": "^2.54.0",
+    "eslint": "9.23.0",
+    "eslint-config-next": "15.2.4",
     "pino-pretty": "^13.0.0",
     "postcss": "^8.5.3",
     "prettier": "3.5.3",
